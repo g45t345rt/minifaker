@@ -1,6 +1,6 @@
 # minifaker
 
-Generate fake data.
+Generate fake data.  
 An alternative to faker.js with cjs or esm syntax
 
 ## npm
@@ -20,10 +20,10 @@ Too much work. I will be adding new functions here from time to time.
 
 ```ts
 import minifaker from 'minifaker'
-import 'minifaker/locale/en' // you don't need to import locale if you're not using any locale dependent functions
+import 'minifaker/dist/locale/en' // you don't need to import locale if you're not using any locale dependent functions
 
 // const minifaker = require('minifaker')
-// require('minifaker/locale/en')
+// require('minifaker/dist/locale/en')
 
 minifaker.firstName()
 ```
