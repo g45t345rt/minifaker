@@ -1,6 +1,7 @@
 # minifaker
 
-An alternative to faker.js
+Generate fake data.
+An alternative to faker.js with cjs or esm syntax
 
 ## npm
 
@@ -11,21 +12,27 @@ An alternative to faker.js
 faker.js is too big and there is no tree shaking.
 <https://github.com/Marak/faker.js/issues/785>
 
-### why not create a pull request?
+### why not create a pull request to faker.js?
 
-Would be to exhaustive to create a big pull request for tree shaking. I'll be adding more functions from time to time.
+Too much work. I will be adding new functions here from time to time.
 
 ## how to use
 
 ```ts
+import minifaker from 'minifaker'
+import 'minifaker/locale/en' // you don't need to import locale if you're not using any locale dependent functions
 
+// const minifaker = require('minifaker')
+// require('minifaker/locale/en')
+
+minifaker.firstName()
 ```
 
-## faker.js support
+## functions
 
-|Function|Locales|Replaced by|
+|Function|Locale|Faker.js|
 |-|-|-|
 |arrayElement|n/a|arrayElement
-|number|n/a|randomNumber|
+|randomNumber|n/a|number|
 |firstName|en,fr|firstName
-|phoneNumber|n/a|phoneNumber
+|phoneNumber|en,fr,fr_CA|phoneNumber
