@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "lib": [
+      "ESNext"
+    ],
+    "types": [
+      "jest"
+    ]
+  },
+  "include": [
+    "./src"
+  ]
+}

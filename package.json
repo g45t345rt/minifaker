@@ -1,0 +1,31 @@
+{
+  "name": "minifaker",
+  "version": "1.0.0",
+  "description": "lightweight faker.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index",
+  "browser": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "ts-node bundle.ts && tsc ./src/index.ts --declaration --emitDeclarationOnly --outdir dist",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g45t345rt/minifaker"
+  },
+  "homepage": "https://github.com/g45t345rt/minifaker#readme",
+  "author": "g45t345rt",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "esbuild": "^0.13.13",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0"
+  }
+}
