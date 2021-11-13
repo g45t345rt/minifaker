@@ -19,13 +19,14 @@ Too much work to get the pull request denied. Instead, I will be adding new func
 ### Better alternatives
 
 I will deprecate functions with better alternatives.
-use `npm i nanoid` to generate string ID
-use `npm i lorem-ipsum` to generate lorem words
+
+- use `npm i nanoid` to generate string ID
+- use `npm i lorem-ipsum` to generate lorem words  
 
 ### Duplicates
 
 I've notice that faker locales have duplicate words :S.  
-I will remove the duplicates when importing locale files to reduce size as much as possible.
+I'll try fix the duplicates when importing locale files to reduce size as much as possible.
 
 ## Example / usage
 
@@ -43,11 +44,11 @@ arrayElement(['one', 'two', 'three'])
 ### Using locale dependent functions
 
 ```ts
-import minifaker, { cityName } from 'minifaker'
+import minifaker, { cityName, Gender } from 'minifaker'
 import 'minifaker/dist/locales/en' // first import is set a default locale
 import 'minifaker/dist/locales/fr'
 
-minifaker.firstName({ gender: 'female' }) // female name in english
+minifaker.firstName({ gender: Gender.FEMALE }) // female name in english
 cityName({ locale: 'fr' }) // french city name
 ```
 
@@ -69,3 +70,4 @@ cityName({ locale: 'fr' }) // french city name
 |use `lorem-ipsum.js`|n/a|lorem
 |objectElement|n/a|objectElement
 |array|n/a|n/a
+|lastName|en,fr|lastName

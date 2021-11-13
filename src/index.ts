@@ -48,7 +48,7 @@ export const arrayElement = <T>(array: T[]): T => {
   return array[number({ max: array.length - 1 })]
 }
 
-export const array = <T>(count: number, cb: (index) => void): T[] => {
+export const array = <T>(count: number, cb: (index: number) => void): T[] => {
   let newArray = []
   for (let i = 0; i < count; i++) {
     newArray = [...newArray, cb(i)]
@@ -63,13 +63,18 @@ export const objectElement = (obj: any): { key: string, value: unknown } => {
   return { key, value: obj[key] }
 }
 
-export const firstName = (options: { locale?: string, gender?: string } = {}): string => {
+export enum Gender {
+  MALE = 'male',
+  FEMALE = 'female'
+}
+
+export const firstName = (options: { locale?: string, gender?: Gender } = {}): string => {
   const { locale, gender } = options
   switch (gender) {
-    case 'female':
+    case Gender.FEMALE:
       const femaleFirstNames = getLocaleData<string[]>({ locale, key: 'femaleFirstNames' })
       return arrayElement(femaleFirstNames)
-    case 'male':
+    case Gender.MALE:
       const maleFirstNames = getLocaleData<string[]>({ locale, key: 'maleFirstNames' })
       return arrayElement(maleFirstNames)
     default:
@@ -140,6 +145,16 @@ export const imageUrlFromPlaceholder = (options: { width: number, height?: numbe
   return url
 }
 
+export const lastName = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const lastNames = getLocaleData<string[]>({ locale, key: 'lastNames' })
+  return arrayElement(lastNames)
+}
+
+export const name = (options?: { locale?: string, gender?: Gender }): string => {
+  return `${firstName(options)} ${lastName(options)}`
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -155,5 +170,7 @@ export default {
   imageUrlFromPlaceIMG,
   imageUrlFromPlaceholder,
   objectElement,
-  array
+  array,
+  lastName,
+  name
 }
