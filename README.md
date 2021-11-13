@@ -1,20 +1,22 @@
 # minifaker
 
 Generate fake data.  
-An alternative to faker.js with cjs or esm syntax
+An alternative to faker.js but with cjs or esm syntax
 
-## npm
+## NPM
 
 `npm i minifaker`
 
-## why
+## Why
 
 faker.js is too big and there is no tree shaking.
 <https://github.com/Marak/faker.js/issues/785>
 
-### why not create a pull request to faker.js?
+### Why not create a pull request to faker.js?
 
-Too much work to make it all work in one pull request. Instead, I will be adding new functions here from time to time.
+Too much work to get the pull request denied. Instead, I will be adding new functions here from time to time.
+I will deprecate functions with better alternatives.
+For example, use `nanoid` to generate string ID
 
 ## Example / usage
 
@@ -23,6 +25,7 @@ Too much work to make it all work in one pull request. Instead, I will be adding
 ```ts
 // You can either import minifaker completely or import the functions you need
 import minifaker, { arrayElement } from 'minifaker'
+// const minifaker = require('minifaker')
 
 minifaker.number()
 arrayElement(['one', 'two', 'three'])
@@ -39,15 +42,17 @@ minifaker.firstName({ gender: 'female' }) // female name in english
 cityName({ locale: 'fr' }) // french city name
 ```
 
-## functions
+## Function mapping
 
 |Function|Locale|Faker.js|
 |-|-|-|
 |arrayElement|n/a|arrayElement
-|number,float|n/a|number
+|number|n/a|number,float
 |boolean|n/a|boolean
+|use `nanoid`|n/a|uuid
 |firstName|en,fr|firstName
 |phoneNumber|en,fr,fr_CA|phoneNumber
 |cityName|en,fr|cityName
 |cityPrefix|en,fr|cityPrefix
 |citySufix|en,fr|citySufix
+|imageUrlFromPlaceIMG, imageUrlFromPlaceholder|n/a|imageUrl

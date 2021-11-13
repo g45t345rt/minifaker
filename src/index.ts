@@ -94,6 +94,37 @@ export const citySufix = (options: { locale?: string } = {}): string => {
   return arrayElement<string>(citySufixes)
 }
 
+export enum PlaceImgCategory {
+  ANY = 'any',
+  ANIMALS = 'animals',
+  ARCHITECTURE = 'architecture',
+  NATURE = 'nature',
+  PEOPLE = 'people',
+  TECH = 'tech'
+}
+
+export enum PlaceImgFilter {
+  GRAYSCALE = 'grayscale',
+  SEPIA = 'sepia'
+}
+
+export const imageUrlFromPlaceIMG = (options: { width: number, height: number, category?: PlaceImgCategory, filter?: PlaceImgFilter }) => {
+  const { width, height, category, filter } = { category: PlaceImgCategory.ANY, ...options }
+  const url = `https://placeimg.com/${width}/${height}/${category}`
+  if (filter) url + `/${filter}`
+  return url
+}
+
+export const imageUrlFromPlaceholder = (options: { width: number, height?: number, backColor?: string, textColor?: string, textValue?: string }) => {
+  const { width, height, backColor, textColor, textValue } = options
+  let url = `https://via.placeholder.com/${width}`
+  if (height) url + `x${height}`
+  if (backColor) url + `/${backColor}`
+  if (textColor) url + `/${textColor}`
+  if (textValue) url + `?text=${textValue}`
+  return url
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -105,5 +136,7 @@ export default {
   firstName,
   arrayElement,
   boolean,
-  city
+  city,
+  imageUrlFromPlaceIMG,
+  imageUrlFromPlaceholder
 }
