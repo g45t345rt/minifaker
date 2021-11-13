@@ -9,6 +9,10 @@ const throwNotLocaleData = (locale: string, key: string) => {
   throw new Error(`The locale [${locale}] data of [${key}] doest not exists. Mostly not implemented yet!.`)
 }
 
+const throwNotImplemented = () => {
+  throw new Error(`Not implemented yet.`)
+}
+
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
   const locale = _locale || defaultLocale
   if (!locales[locale]) throwNoLocale(locale)
@@ -29,15 +33,19 @@ export const setDefaultLocale = (locale: string) => {
   defaultLocale = locale
 }
 
-export const randomNumber = (options: { min?: number, max?: number, float?: boolean } = {}): number => {
+export const number = (options: { min?: number, max?: number, float?: boolean } = {}): number => {
   const { min, max, float } = { min: 0, max: 1, float: false, ...options }
   const value = min + Math.random() * (max - min)
   if (!float) return Math.round(value)
   return value
 }
 
+export const boolean = () => {
+  return !!number({ max: 1 })
+}
+
 export const arrayElement = <T>(array: T[]): T => {
-  return array[randomNumber({ max: array.length - 1 })]
+  return array[number({ max: array.length - 1 })]
 }
 
 export const firstName = (options: { locale?: string, gender?: string } = {}): string => {
@@ -59,16 +67,43 @@ export const phoneNumber = (options: { locale?: string, formats?: string[] } = {
   const { locale, formats } = options
   const phoneFormats = formats || getLocaleData<string[]>({ locale, key: 'phoneFormats' })
   return arrayElement(phoneFormats).split('').map((c) => {
-    if (c === '#') return randomNumber({ max: 9 })
+    if (c === '#') return number({ max: 9 })
     return c
   }).join('')
+}
+
+export const city = (options: { locale?: string } = {}): string => {
+  return throwNotImplemented()
+}
+
+export const cityName = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const cityNames = getLocaleData<string[]>({ locale, key: 'cityNames' })
+  return arrayElement(cityNames)
+}
+
+export const cityPrefix = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const cityPrefixes = getLocaleData<string[]>({ locale, key: 'cityPrefixes' })
+  return arrayElement<string>(cityPrefixes)
+}
+
+export const citySufix = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const citySufixes = getLocaleData<string[]>({ locale, key: 'citySufixes' })
+  return arrayElement<string>(citySufixes)
 }
 
 export default {
   setDefaultLocale,
   addLocale,
-  randomNumber,
+  cityName,
+  citySufix,
+  cityPrefix,
+  number,
   phoneNumber,
   firstName,
-  arrayElement
+  arrayElement,
+  boolean,
+  city
 }
