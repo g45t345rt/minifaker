@@ -48,6 +48,21 @@ export const arrayElement = <T>(array: T[]): T => {
   return array[number({ max: array.length - 1 })]
 }
 
+export const array = <T>(count: number, cb: (index) => void): T[] => {
+  let newArray = []
+  for (let i = 0; i < count; i++) {
+    newArray = [...newArray, cb(i)]
+  }
+  return newArray
+}
+
+export const objectElement = (obj: any): { key: string, value: unknown } => {
+  if (typeof obj !== 'object' || Array.isArray(obj)) throw new Error(`obj must be an object.`)
+  const keys = Object.keys(obj)
+  const key = arrayElement(keys)
+  return { key, value: obj[key] }
+}
+
 export const firstName = (options: { locale?: string, gender?: string } = {}): string => {
   const { locale, gender } = options
   switch (gender) {
@@ -138,5 +153,7 @@ export default {
   boolean,
   city,
   imageUrlFromPlaceIMG,
-  imageUrlFromPlaceholder
+  imageUrlFromPlaceholder,
+  objectElement,
+  array
 }

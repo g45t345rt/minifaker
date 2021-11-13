@@ -10,4 +10,7 @@ test('Test function without locale', () => {
   expect(minifaker.imageUrlFromPlaceIMG({ width: 500, height: 500, category: PlaceImgCategory.ANIMALS, filter: PlaceImgFilter.SEPIA }))
   expect(minifaker.imageUrlFromPlaceholder({ width: 250 }))
   expect(minifaker.imageUrlFromPlaceholder({ width: 250, height: 200, backColor: 'black', textColor: 'white', textValue: 'minifaker' }))
+  expect(minifaker.objectElement({ 'key1': 'value', 'key2': 'value' }))
+  expect(() => minifaker.objectElement([])).toThrow()
+  expect(minifaker.array(5, (i) => i)).toEqual([0, 1, 2, 3, 4])
 })

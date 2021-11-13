@@ -15,8 +15,17 @@ faker.js is too big and there is no tree shaking.
 ### Why not create a pull request to faker.js?
 
 Too much work to get the pull request denied. Instead, I will be adding new functions here from time to time.
+
+### Better alternatives
+
 I will deprecate functions with better alternatives.
-For example, use `nanoid` to generate string ID
+use `npm i nanoid` to generate string ID
+use `npm i lorem-ipsum` to generate lorem words
+
+### Duplicates
+
+I've notice that faker locales have duplicate words :S.  
+I will remove the duplicates when importing locale files to reduce size as much as possible.
 
 ## Example / usage
 
@@ -53,6 +62,10 @@ cityName({ locale: 'fr' }) // french city name
 |firstName|en,fr|firstName
 |phoneNumber|en,fr,fr_CA|phoneNumber
 |cityName|en,fr|cityName
-|cityPrefix|en,fr|cityPrefix
-|citySufix|en,fr|citySufix
-|imageUrlFromPlaceIMG, imageUrlFromPlaceholder|n/a|imageUrl
+|cityPrefix|en|cityPrefix
+|citySufix|en|citySufix
+|imageUrlFromPlaceIMG|n/a|imageUrl
+|imageUrlFromPlaceholder|n/a|imageUrl
+|use `lorem-ipsum.js`|n/a|lorem
+|objectElement|n/a|objectElement
+|array|n/a|n/a
