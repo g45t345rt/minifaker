@@ -1,6 +1,6 @@
 import 'jest'
 import minifaker from '../src'
-import '../src/locale/en'
+import '../src/locales/en'
 
 test('Test locale en', () => {
   expect(minifaker.phoneNumber())

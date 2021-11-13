@@ -35,8 +35,8 @@ arrayElement(['one', 'two', 'three'])
 
 ```ts
 import minifaker, { cityName } from 'minifaker'
-import 'minifaker/dist/locale/en' // first import is set a default locale
-import 'minifaker/dist/locale/fr'
+import 'minifaker/dist/locales/en' // first import is set a default locale
+import 'minifaker/dist/locales/fr'
 
 minifaker.firstName({ gender: 'female' }) // female name in english
 cityName({ locale: 'fr' }) // french city name
@@ -44,7 +44,7 @@ cityName({ locale: 'fr' }) // french city name
 
 ## Function mapping
 
-|Function|Locale|Faker.js|
+|Function|Locales|Faker.js|
 |-|-|-|
 |arrayElement|n/a|arrayElement
 |number|n/a|number,float

@@ -1,7 +1,7 @@
 import 'jest'
 import minifaker from '../src'
-import '../src/locale/fr'
-import '../src/locale/fr_CA'
+import '../src/locales/fr'
+import '../src/locales/fr_CA'
 
 test('Test locale fr/fr_CA', () => {
   //minifaker.setDefaultLocale('fr') -> already set by import the first locale

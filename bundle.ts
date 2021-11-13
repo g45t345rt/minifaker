@@ -3,9 +3,9 @@ import * as esbuild from 'esbuild'
 const config = {
   entryPoints: [
     './src/index.ts',
-    './src/locale/en/index.ts',
-    './src/locale/fr/index.ts',
-    './src/locale/fr_CA/index.ts'
+    './src/locales/en/index.ts',
+    './src/locales/fr/index.ts',
+    './src/locales/fr_CA/index.ts'
   ],
   platform: 'node',
   bundle: true,
