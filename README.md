@@ -2,6 +2,7 @@
 
 Generate fake data.  
 An alternative to faker.js but with cjs or esm syntax
+<https://github.com/Marak/faker.js>
 
 ## NPM
 
@@ -9,14 +10,18 @@ An alternative to faker.js but with cjs or esm syntax
 
 ## Why
 
-faker.js is too big and there is no tree shaking.
+faker.js is too big and it's not currently supporting tree shaking.
 <https://github.com/Marak/faker.js/issues/785>
 
 ### Why not create a pull request to faker.js?
 
-Too much work to get the pull request denied. Instead, I will be adding new functions here from time to time.
+Supporting ES6 modules for faker.js would need a big restructure change.
 
-### Better alternatives
+Right now, I just need a couple of functions and it's faster to create a new package mirroring functions without having to do a lot of refactoring. However, importing the entire package will take work and time, but at least I can start using it without having to finish it.
+
+I also want to use Typescript and introduce new functions.
+
+### Better function alternatives
 
 I will deprecate functions with better alternatives.
 
@@ -54,20 +59,24 @@ cityName({ locale: 'fr' }) // french city name
 
 ## Function mapping
 
-|Function|Locales|Faker.js|
+|Faker.js|Locales|Func|
 |-|-|-|
 |arrayElement|n/a|arrayElement
-|number|n/a|number,float
+|number,float|n/a|number
 |boolean|n/a|boolean
-|use `nanoid`|n/a|uuid
+|uuid|n/a|use `nanoid`
 |firstName|en,fr|firstName
 |phoneNumber|en,fr,fr_CA|phoneNumber
 |cityName|en,fr|cityName
 |cityPrefix|en|cityPrefix
 |citySufix|en|citySufix
-|imageUrlFromPlaceIMG|n/a|imageUrl
-|imageUrlFromPlaceholder|n/a|imageUrl
-|use `lorem-ipsum.js`|n/a|lorem
+|imageUrl|n/a|imageUrlFromPlaceIMG
+|imageUrl|n/a|imageUrlFromPlaceholder
+|lorem|n/a|use `lorem-ipsum`
 |objectElement|n/a|objectElement
-|array|n/a|n/a
+|n/a|n/a|array
 |lastName|en,fr|lastName
+|jobTitle|en|jobTitle
+|jobArea|en|jobArea
+|jobDescriptor|en|jobDescriptor
+|jobType|en,fr|jobType

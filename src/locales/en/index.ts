@@ -8,6 +8,7 @@ import cityNames from './address/cityNames'
 import cityPrefixes from './address/cityPrefixes'
 import citySufixes from './address/citySufixes'
 import lastNames from './name/lastNames'
+import titles from './name/titles'
 
 const locale = {
   maleFirstNames,
@@ -17,7 +18,8 @@ const locale = {
   cityNames,
   cityPrefixes,
   citySufixes,
-  lastNames
+  lastNames,
+  ...titles
 }
 
 minifaker.addLocale('en', locale)

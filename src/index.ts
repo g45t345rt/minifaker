@@ -155,6 +155,34 @@ export const name = (options?: { locale?: string, gender?: Gender }): string => 
   return `${firstName(options)} ${lastName(options)}`
 }
 
+interface TitlesDefinition {
+  descriptors: string[]
+  jobs: string[]
+  levels: string[]
+}
+
+export const jobTitle = (options?: { locale?: string }): string => {
+  return `${jobDescriptor(options)} ${jobArea(options)} ${jobType(options)}`
+}
+
+export const jobType = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const jobTypes = getLocaleData<string[]>({ locale, key: 'jobTypes' })
+  return arrayElement(jobTypes)
+}
+
+export const jobArea = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const jobLevels = getLocaleData<string[]>({ locale, key: 'jobLevels' })
+  return arrayElement(jobLevels)
+}
+
+export const jobDescriptor = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const jobDescriptors = getLocaleData<string[]>({ locale, key: 'jobDescriptors' })
+  return arrayElement(jobDescriptors)
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -172,5 +200,9 @@ export default {
   objectElement,
   array,
   lastName,
-  name
+  name,
+  jobTitle,
+  jobArea,
+  jobDescriptor,
+  jobType
 }

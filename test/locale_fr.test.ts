@@ -16,4 +16,5 @@ test('Test locale fr/fr_CA', () => {
   expect(() => minifaker.setDefaultLocale('alien')).toThrow()
   expect(minifaker.lastName())
   expect(minifaker.name())
+  expect(minifaker.jobType())
 })
