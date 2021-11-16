@@ -155,12 +155,6 @@ export const name = (options?: { locale?: string, gender?: Gender }): string => 
   return `${firstName(options)} ${lastName(options)}`
 }
 
-interface TitlesDefinition {
-  descriptors: string[]
-  jobs: string[]
-  levels: string[]
-}
-
 export const jobTitle = (options?: { locale?: string }): string => {
   return `${jobDescriptor(options)} ${jobArea(options)} ${jobType(options)}`
 }
@@ -181,6 +175,21 @@ export const jobDescriptor = (options: { locale?: string } = {}): string => {
   const { locale } = options
   const jobDescriptors = getLocaleData<string[]>({ locale, key: 'jobDescriptors' })
   return arrayElement(jobDescriptors)
+}
+
+export const ip = (): string => {
+  return array(4, () => number({ max: 255 })).join('.')
+}
+
+export const port = (): number => {
+  return number({ max: 65535 })
+}
+
+export const adjective = (options: { locale?: string, filter?: (word: string) => void } = {}): string => {
+  const { locale, filter } = options
+  const adjectives = getLocaleData<string[]>({ locale, key: 'adjectives' })
+  if (typeof filter === 'function') return arrayElement(adjectives.filter(filter))
+  return arrayElement(adjectives)
 }
 
 export default {
@@ -204,5 +213,8 @@ export default {
   jobTitle,
   jobArea,
   jobDescriptor,
-  jobType
+  jobType,
+  ip,
+  port,
+  adjective
 }

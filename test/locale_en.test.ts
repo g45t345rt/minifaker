@@ -17,4 +17,6 @@ test('Test locale en', () => {
   expect(minifaker.jobArea())
   expect(minifaker.jobDescriptor())
   expect(minifaker.jobType())
+  expect(minifaker.adjective())
+  expect(minifaker.adjective({ filter: (word) => word.length > 5 }))
 })

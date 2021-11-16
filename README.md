@@ -38,7 +38,8 @@ I'll try fix the duplicates when importing locale files to reduce size as much a
 ### Using functions
 
 ```ts
-// You can either import minifaker completely or import the functions you need
+// You can either import minifaker completely 
+// or import the functions you need
 import minifaker, { arrayElement } from 'minifaker'
 // const minifaker = require('minifaker')
 
@@ -50,33 +51,47 @@ arrayElement(['one', 'two', 'three'])
 
 ```ts
 import minifaker, { cityName, Gender } from 'minifaker'
-import 'minifaker/dist/locales/en' // first import is set a default locale
+// There is no default locale import (not even `english`)
+import 'minifaker/dist/locales/en' // the first locale import is set as default
 import 'minifaker/dist/locales/fr'
 
 minifaker.firstName({ gender: Gender.FEMALE }) // female name in english
 cityName({ locale: 'fr' }) // french city name
 ```
 
+### Generating a list of 50 english names
+
+```ts
+import { array, name } from 'minifaker'
+import 'minifaker/dist/locales/en'
+
+array(50, () => name())
+```
+
 ## Function mapping
 
 |Faker.js|Locales|Func|
 |-|-|-|
-|arrayElement|n/a|arrayElement
-|number,float|n/a|number
-|boolean|n/a|boolean
-|uuid|n/a|use `nanoid`
-|firstName|en,fr|firstName
-|phoneNumber|en,fr,fr_CA|phoneNumber
-|cityName|en,fr|cityName
-|cityPrefix|en|cityPrefix
-|citySufix|en|citySufix
-|imageUrl|n/a|imageUrlFromPlaceIMG
-|imageUrl|n/a|imageUrlFromPlaceholder
-|lorem|n/a|use `lorem-ipsum`
-|objectElement|n/a|objectElement
-|n/a|n/a|array
-|lastName|en,fr|lastName
-|jobTitle|en|jobTitle
-|jobArea|en|jobArea
-|jobDescriptor|en|jobDescriptor
-|jobType|en,fr|jobType
+arrayElement|n/a|arrayElement
+number,float|n/a|number
+boolean|n/a|boolean
+uuid|n/a|use `nanoid`
+firstName|en,fr|firstName
+phoneNumber|en,fr,fr_CA|phoneNumber
+cityName|en,fr|cityName
+cityPrefix|en|cityPrefix
+citySufix|en|citySufix
+imageUrl|n/a|imageUrlFromPlaceIMG
+imageUrl|n/a|imageUrlFromPlaceholder
+lorem|n/a|use `lorem-ipsum`
+objectElement|n/a|objectElement
+n/a|n/a|array
+lastName|en,fr|lastName
+jobTitle|en|jobTitle
+jobArea|en|jobArea
+jobDescriptor|en|jobDescriptor
+jobType|en,fr|jobType
+name|en,fr|name
+ip|n/a|ip
+port|n/a|port
+adjective|en|adjective

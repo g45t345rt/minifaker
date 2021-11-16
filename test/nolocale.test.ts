@@ -13,4 +13,6 @@ test('Test function without locale', () => {
   expect(minifaker.objectElement({ 'key1': 'value', 'key2': 'value' }))
   expect(() => minifaker.objectElement([])).toThrow()
   expect(minifaker.array(5, (i) => i)).toEqual([0, 1, 2, 3, 4])
+  expect(minifaker.ip())
+  expect(minifaker.port())
 })
