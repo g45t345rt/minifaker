@@ -2,6 +2,7 @@ import 'jest'
 import minifaker, { PlaceImgCategory, PlaceImgFilter } from '../src'
 
 test('Test function without locale', () => {
+  expect(() => minifaker.firstName()).toThrow() // no default locale error
   expect(minifaker.number()).toBeLessThanOrEqual(1)
   expect(minifaker.number({ float: true }))
   expect(minifaker.boolean())
@@ -15,4 +16,7 @@ test('Test function without locale', () => {
   expect(minifaker.array(5, (i) => i)).toEqual([0, 1, 2, 3, 4])
   expect(minifaker.ip())
   expect(minifaker.port())
+  expect(minifaker.ipv6())
+  expect(minifaker.color())
+  expect(minifaker.color({ r: 1 }))
 })

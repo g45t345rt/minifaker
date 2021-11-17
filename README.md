@@ -94,4 +94,6 @@ jobType|en,fr|jobType
 name|en,fr|name
 ip|n/a|ip
 port|n/a|port
-adjective|en|adjective
+adjective,adverb,conjunction,  interjection,noun,preposition,verb|en|word
+ipv6|n/a|ipv6
+color|n/a|color

@@ -1,6 +1,10 @@
 const locales = {}
 let defaultLocale = null
 
+const throwNoDefaultLocale = () => {
+  throw new Error(`No default locale defined. Import at least one locale!`)
+}
+
 const throwNoLocale = (locale: string) => {
   throw new Error(`The locale [${locale}] is not imported or supported.`)
 }
@@ -14,6 +18,8 @@ const throwNotImplemented = () => {
 }
 
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
+  if (!defaultLocale) throwNoDefaultLocale()
+
   const locale = _locale || defaultLocale
   if (!locales[locale]) throwNoLocale(locale)
 
@@ -185,9 +191,37 @@ export const port = (): number => {
   return number({ max: 65535 })
 }
 
-export const adjective = (options: { locale?: string, filter?: (word: string) => void } = {}): string => {
-  const { locale, filter } = options
-  const adjectives = getLocaleData<string[]>({ locale, key: 'adjectives' })
+export const ipv6 = (): string => {
+  return array(8, () => number({ max: 65535 }).toString(16)).join(':')
+}
+
+export const color = (options: { r?: number, g?: number, b?: number } = {}): string => {
+  const { r, g, b } = options
+  const leadingZero = (value: string) => {
+    if (value.length === 1) return `0${value}`
+    return value
+  }
+
+  const red = (r || number({ max: 256 })).toString(16)
+  const green = (g || number({ max: 256 })).toString(16)
+  const blue = (b || number({ max: 256 })).toString(16)
+  return `#${leadingZero(red)}${leadingZero(green)}${leadingZero(blue)}`
+}
+
+export enum WordType {
+  VERB = 'verb',
+  PREPOSITION = 'preposition',
+  NOUN = 'noun',
+  INTERJECTION = 'interjection',
+  CONJUNCTION = 'conjunction',
+  ADVERB = 'adverb',
+  ADJECTIVE = 'adjective'
+}
+
+export const word = (options: { locale?: string, type?: WordType, filter?: (word: string) => void } = {}): string => {
+  const { type, locale, filter } = options
+  const _type = type || arrayElement(Object.values(WordType))
+  const adjectives = getLocaleData<string[]>({ locale, key: `${_type}s` })
   if (typeof filter === 'function') return arrayElement(adjectives.filter(filter))
   return arrayElement(adjectives)
 }
@@ -216,5 +250,7 @@ export default {
   jobType,
   ip,
   port,
-  adjective
+  word,
+  ipv6,
+  color
 }

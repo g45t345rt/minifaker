@@ -1,5 +1,5 @@
 import 'jest'
-import minifaker, { Gender } from '../src'
+import minifaker, { Gender, WordType } from '../src'
 import '../src/locales/en'
 
 test('Test locale en', () => {
@@ -17,6 +17,7 @@ test('Test locale en', () => {
   expect(minifaker.jobArea())
   expect(minifaker.jobDescriptor())
   expect(minifaker.jobType())
-  expect(minifaker.adjective())
-  expect(minifaker.adjective({ filter: (word) => word.length > 5 }))
+  expect(minifaker.word())
+  expect(minifaker.word({ filter: (word) => word.length > 5 }))
+  expect(minifaker.word({ type: WordType.NOUN }))
 })

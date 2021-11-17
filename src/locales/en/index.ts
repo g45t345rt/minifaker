@@ -9,9 +9,14 @@ import cityPrefixes from './address/cityPrefixes'
 import citySufixes from './address/citySufixes'
 import lastNames from './name/lastNames'
 import titles from './name/titles'
+
 import adjectives from './word/adjectives'
 import adverbs from './word/adverbs'
 import conjunctions from './word/conjunctions'
+import interjections from './word/interjections'
+import nouns from './word/nouns'
+import prepositions from './word/prepositions'
+import verbs from './word/verbs'
 
 const locale = {
   maleFirstNames,
@@ -25,7 +30,11 @@ const locale = {
   ...titles,
   adjectives,
   adverbs,
-  conjunctions
+  conjunctions,
+  interjections,
+  nouns,
+  prepositions,
+  verbs
 }
 
 minifaker.addLocale('en', locale)
