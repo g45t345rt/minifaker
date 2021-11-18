@@ -97,3 +97,5 @@ port|n/a|port
 adjective,adverb,conjunction,  interjection,noun,preposition,verb|en|word
 ipv6|n/a|ipv6
 color|n/a|color
+username|en,fr|username
+mac|n/a|macAddress

@@ -20,4 +20,8 @@ test('Test locale en', () => {
   expect(minifaker.word())
   expect(minifaker.word({ filter: (word) => word.length > 5 }))
   expect(minifaker.word({ type: WordType.NOUN }))
+  expect(minifaker.username())
+  expect(minifaker.username({ type: 0 }))
+  expect(minifaker.username({ type: 1 }))
+  expect(minifaker.username({ type: 2 }))
 })

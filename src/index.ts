@@ -195,17 +195,18 @@ export const ipv6 = (): string => {
   return array(8, () => number({ max: 65535 }).toString(16)).join(':')
 }
 
+const hexPadLeft = (value: string) => {
+  if (value.length === 1) return `0${value}`
+  return value
+}
+
 export const color = (options: { r?: number, g?: number, b?: number } = {}): string => {
   const { r, g, b } = options
-  const leadingZero = (value: string) => {
-    if (value.length === 1) return `0${value}`
-    return value
-  }
 
   const red = (r || number({ max: 256 })).toString(16)
   const green = (g || number({ max: 256 })).toString(16)
   const blue = (b || number({ max: 256 })).toString(16)
-  return `#${leadingZero(red)}${leadingZero(green)}${leadingZero(blue)}`
+  return `#${hexPadLeft(red)}${hexPadLeft(green)}${hexPadLeft(blue)}`
 }
 
 export enum WordType {
@@ -224,6 +225,71 @@ export const word = (options: { locale?: string, type?: WordType, filter?: (word
   const adjectives = getLocaleData<string[]>({ locale, key: `${_type}s` })
   if (typeof filter === 'function') return arrayElement(adjectives.filter(filter))
   return arrayElement(adjectives)
+}
+
+export const username = (options: { locale?: string, type?: number } = {}): string => {
+  const { locale, type } = options
+
+  switch (type || number({ max: 2 })) {
+    case 0:
+      return firstName({ locale }) + number({ max: 99 })
+    case 1:
+      return firstName({ locale }) + arrayElement(['.', '_']) + lastName({ locale })
+    case 2:
+      return firstName({ locale }) + arrayElement(['.', '_']) + lastName({ locale }) + number({ max: 99 })
+  }
+}
+
+export enum MacAddressSeparator { NONE = '', DOT = '.', COLON = ':', DASH = '-', SPACE = ' ' }
+
+export enum MacAddressTransmission {
+  UNICAST = 'unicast',
+  MULTICAST = 'multicast'
+}
+
+export enum MacAddressAdministration {
+  LAA = 'laa', // locally administered
+  UAA = 'uaa' // globally unique (oui enforced)
+}
+
+// TODO: EUI64 address -- https://kwallaceccie.mykajabi.com/blog/how-to-calculate-an-eui-64-address
+export const macAddress = (options: {
+  separator?: MacAddressSeparator,
+  transmission?: MacAddressTransmission,
+  administration?: MacAddressAdministration
+} = {}) => {
+  const { separator = MacAddressSeparator.COLON, transmission, administration } = options
+
+  const mac = array(6, (index) => {
+    let value = number({ max: 255 })
+
+    // https://en.wikipedia.org/wiki/MAC_address#Address_details
+    // use first octet to set transmission and administration bits
+    if (index === 0) {
+      if (transmission === MacAddressTransmission.MULTICAST)
+        value |= 1 << 0 // set bit https://stackoverflow.com/questions/1436438/how-do-you-set-clear-and-toggle-a-single-bit-in-javascript
+      else if (transmission === MacAddressTransmission.UNICAST)
+        value &= ~(1 << 0) // unset bit
+
+      if (administration === MacAddressAdministration.LAA)
+        value |= 1 << 1
+      else if (administration === MacAddressAdministration.UAA)
+        value &= ~(1 << 1)
+    }
+
+    return hexPadLeft(value.toString(16))
+  })
+
+  if (separator === MacAddressSeparator.DOT) {
+    let dotMac = ''
+    for (let i = 0; i < mac.length; i++) {
+      dotMac += mac[i]
+      if (i % 2 == 1 && i < mac.length - 1) dotMac += separator
+    }
+    return dotMac
+  }
+
+  return mac.join(separator)
 }
 
 export default {
@@ -252,5 +318,7 @@ export default {
   port,
   word,
   ipv6,
-  color
+  color,
+  username,
+  macAddress
 }

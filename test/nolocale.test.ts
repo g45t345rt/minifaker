@@ -1,5 +1,5 @@
 import 'jest'
-import minifaker, { PlaceImgCategory, PlaceImgFilter } from '../src'
+import minifaker, { MacAddressAdministration, MacAddressSeparator, MacAddressTransmission, PlaceImgCategory, PlaceImgFilter } from '../src'
 
 test('Test function without locale', () => {
   expect(() => minifaker.firstName()).toThrow() // no default locale error
@@ -19,4 +19,11 @@ test('Test function without locale', () => {
   expect(minifaker.ipv6())
   expect(minifaker.color())
   expect(minifaker.color({ r: 1 }))
+  expect(minifaker.macAddress())
+  expect(minifaker.macAddress({ separator: MacAddressSeparator.NONE }))
+  expect(minifaker.macAddress({ separator: MacAddressSeparator.DOT }))
+  expect(minifaker.macAddress({ separator: MacAddressSeparator.SPACE }))
+  expect(minifaker.macAddress({ separator: MacAddressSeparator.DASH }))
+  expect(minifaker.macAddress({ transmission: MacAddressTransmission.MULTICAST, administration: MacAddressAdministration.LAA }))
+  expect(minifaker.macAddress({ transmission: MacAddressTransmission.UNICAST, administration: MacAddressAdministration.UAA }))
 })
