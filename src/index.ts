@@ -114,10 +114,10 @@ export const cityPrefix = (options: { locale?: string } = {}): string => {
   return arrayElement<string>(cityPrefixes)
 }
 
-export const citySufix = (options: { locale?: string } = {}): string => {
+export const citySuffix = (options: { locale?: string } = {}): string => {
   const { locale } = options
-  const citySufixes = getLocaleData<string[]>({ locale, key: 'citySufixes' })
-  return arrayElement<string>(citySufixes)
+  const citySuffixes = getLocaleData<string[]>({ locale, key: 'citySuffixes' })
+  return arrayElement<string>(citySuffixes)
 }
 
 export enum PlaceImgCategory {
@@ -227,16 +227,20 @@ export const word = (options: { locale?: string, type?: WordType, filter?: (word
   return arrayElement(adjectives)
 }
 
-export const username = (options: { locale?: string, type?: number } = {}): string => {
-  const { locale, type } = options
+export const username = (options: { locale?: string, type?: number, firstName?: string, lastName?: string } = {}): string => {
+  const { locale, type: _type, firstName: _firstName, lastName: _lastName } = options
 
-  switch (type || number({ max: 2 })) {
+  const newFirstName = _firstName || firstName({ locale })
+  const newLastName = _lastName || lastName({ locale })
+  const type = typeof _type !== 'undefined' ? _type : number({ max: 2 })
+
+  switch (type) {
     case 0:
-      return firstName({ locale }) + number({ max: 99 })
+      return newFirstName + number({ max: 99 })
     case 1:
-      return firstName({ locale }) + arrayElement(['.', '_']) + lastName({ locale })
+      return newFirstName + arrayElement(['.', '_']) + newLastName
     case 2:
-      return firstName({ locale }) + arrayElement(['.', '_']) + lastName({ locale }) + number({ max: 99 })
+      return newFirstName + arrayElement(['.', '_']) + newLastName + number({ max: 99 })
   }
 }
 
@@ -257,7 +261,7 @@ export const macAddress = (options: {
   separator?: MacAddressSeparator,
   transmission?: MacAddressTransmission,
   administration?: MacAddressAdministration
-} = {}) => {
+} = {}): string => {
   const { separator = MacAddressSeparator.COLON, transmission, administration } = options
 
   const mac = array(6, (index) => {
@@ -292,11 +296,37 @@ export const macAddress = (options: {
   return mac.join(separator)
 }
 
+export const email = (options: { locale?: string, firstName?: string, lastName?: string, provider?: string } = {}): string => {
+  const { locale, provider: _provider } = options
+  const freeEmails = getLocaleData<string[]>({ locale, key: 'freeEmails' })
+  const provider = _provider || arrayElement(freeEmails)
+  return `${username(options)}@${provider}`
+}
+
+export const domainName = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+
+  const name = arrayElement([
+    word({ locale, type: WordType.NOUN }),
+    firstName({ locale })
+  ])
+
+  return `${name.toLowerCase()}.${domainSuffix({ locale })}`
+}
+
+export const domainSuffix = (options: { locale?: string } = {}): string => {
+  const { locale } = options
+  const domainSuffixes = getLocaleData<string[]>({ locale, key: 'domainSuffixes' })
+  return arrayElement(domainSuffixes)
+}
+
+export const domainUrl = (options: { locale?: string } = {}): string => `https://${domainName(options)}`
+
 export default {
   setDefaultLocale,
   addLocale,
   cityName,
-  citySufix,
+  citySuffix,
   cityPrefix,
   number,
   phoneNumber,
@@ -320,5 +350,9 @@ export default {
   ipv6,
   color,
   username,
-  macAddress
+  macAddress,
+  domainSuffix,
+  domainName,
+  email,
+  domainUrl
 }

@@ -80,7 +80,7 @@ firstName|en,fr|firstName
 phoneNumber|en,fr,fr_CA|phoneNumber
 cityName|en,fr|cityName
 cityPrefix|en|cityPrefix
-citySufix|en|citySufix
+citySuffix|en|citySufix
 imageUrl|n/a|imageUrlFromPlaceIMG
 imageUrl|n/a|imageUrlFromPlaceholder
 lorem|n/a|use `lorem-ipsum`
@@ -99,3 +99,7 @@ ipv6|n/a|ipv6
 color|n/a|color
 username|en,fr|username
 mac|n/a|macAddress
+domainName|en,fr,fr_CA|domainName
+domainSuffix|en,fr,fr_CA|domainSuffix
+email|en,fr,fr_CA|email
+url|en,fr,fr_CA|domainUrl

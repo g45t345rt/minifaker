@@ -7,6 +7,8 @@ import phoneFormats from './phone/formats'
 import cityNames from './address/cityNames'
 import lastNames from './name/lastNames'
 import titles from './name/titles'
+import domainSuffixes from './internet/domainSuffixes'
+import freeEmails from './internet/freeEmails'
 
 const locale = {
   maleFirstNames,
@@ -15,7 +17,9 @@ const locale = {
   phoneFormats,
   cityNames,
   lastNames,
-  ...titles
+  ...titles,
+  domainSuffixes,
+  freeEmails
 }
 
 minifaker.addLocale('fr', locale)
