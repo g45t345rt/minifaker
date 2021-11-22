@@ -26,4 +26,5 @@ test('Test function without locale', () => {
   expect(minifaker.macAddress({ separator: MacAddressSeparator.DASH }))
   expect(minifaker.macAddress({ transmission: MacAddressTransmission.MULTICAST, administration: MacAddressAdministration.LAA }))
   expect(minifaker.macAddress({ transmission: MacAddressTransmission.UNICAST, administration: MacAddressAdministration.UAA }))
+  expect(minifaker.zipCode({ format: '*#A ?#*' }))
 })

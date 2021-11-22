@@ -19,6 +19,7 @@ import prepositions from './word/prepositions'
 import verbs from './word/verbs'
 import domainSuffixes from './internet/domainSuffixes'
 import freeEmails from './internet/freeEmails'
+import postCodeFormats from './address/postCodeFormats'
 
 const locale = {
   maleFirstNames,
@@ -38,7 +39,8 @@ const locale = {
   prepositions,
   verbs,
   domainSuffixes,
-  freeEmails
+  freeEmails,
+  postCodeFormats
 }
 
 minifaker.addLocale('en', locale)

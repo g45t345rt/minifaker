@@ -322,6 +322,28 @@ export const domainSuffix = (options: { locale?: string } = {}): string => {
 
 export const domainUrl = (options: { locale?: string } = {}): string => `https://${domainName(options)}`
 
+export const zipCode = (options: { locale?: string, format?: string } = {}): string => {
+  const { locale, format: _format } = options
+
+  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+  let format = _format
+  if (!format) {
+    const formats = getLocaleData<string[]>({ locale, key: 'postCodeFormats' })
+    format = arrayElement(formats)
+  }
+
+  return format.split('').map((c) => {
+    if (c === '#') return number({ max: 9 }).toString()
+    if (c === '?') return arrayElement(alphabet)
+    if (c === '*') {
+      if (boolean()) return arrayElement(alphabet)
+      else return number({ max: 9 }).toString()
+    }
+    return c
+  }).join('')
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -354,5 +376,6 @@ export default {
   domainSuffix,
   domainName,
   email,
-  domainUrl
+  domainUrl,
+  zipCode
 }

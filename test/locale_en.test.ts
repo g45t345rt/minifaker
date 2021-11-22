@@ -31,4 +31,5 @@ test('Test locale en', () => {
   expect(minifaker.email({ firstName: 'james', lastName: 'bond' }))
   expect(minifaker.email({ provider: 'pm.me' }))
   expect(minifaker.domainUrl())
+  expect(minifaker.zipCode())
 })

@@ -17,4 +17,5 @@ test('Test locale fr/fr_CA', () => {
   expect(minifaker.lastName())
   expect(minifaker.name())
   expect(minifaker.jobType())
+  expect(minifaker.zipCode({ locale: 'fr_CA' }))
 })

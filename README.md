@@ -103,3 +103,4 @@ domainName|en,fr,fr_CA|domainName
 domainSuffix|en,fr,fr_CA|domainSuffix
 email|en,fr,fr_CA|email
 url|en,fr,fr_CA|domainUrl
+zipCode|en,fr,fr_CA|zipCode
