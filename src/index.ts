@@ -344,6 +344,33 @@ export const zipCode = (options: { locale?: string, format?: string } = {}): str
   }).join('')
 }
 
+export const streetSuffix = (options: { locale?: string } = {}) => {
+  const { locale } = options
+  const streetSuffixes = getLocaleData<string[]>({ locale, key: 'streetSuffixes' })
+  return arrayElement(streetSuffixes)
+}
+
+export const streetPrefix = (options: { locale?: string } = {}) => {
+  const { locale } = options
+  const streetSuffixes = getLocaleData<string[]>({ locale, key: 'streetPrefixes' })
+  return arrayElement(streetSuffixes)
+}
+
+export const streetName = (options: { locale?: string } = {}) => {
+  return `${arrayElement([firstName(options), lastName(options)])} ${streetSuffix(options)}`
+}
+
+export const streetAddress = (options: { locale?: string } = {}) => {
+  const streetNumber = array(number({ min: 3, max: 5 }), () => number({ max: 9 })).join('')
+  return `${streetNumber} ${streetName(options)}`
+}
+
+export const timeZone = (options: { locale?: string } = {}) => {
+  const { locale } = options
+  const timeZones = getLocaleData<string[]>({ locale, key: 'timeZones' })
+  return arrayElement(timeZones)
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -377,5 +404,10 @@ export default {
   domainName,
   email,
   domainUrl,
-  zipCode
+  zipCode,
+  streetPrefix,
+  streetSuffix,
+  streetName,
+  streetAddress,
+  timeZone
 }

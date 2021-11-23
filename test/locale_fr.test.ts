@@ -4,7 +4,7 @@ import '../src/locales/fr'
 import '../src/locales/fr_CA'
 
 test('Test locale fr/fr_CA', () => {
-  //minifaker.setDefaultLocale('fr') -> already set by import the first locale
+  //minifaker.setDefaultLocale('fr') -> already set by importing the first locale
 
   expect(minifaker.firstName())
   expect(minifaker.firstName({ gender: Gender.FEMALE }))
@@ -18,4 +18,6 @@ test('Test locale fr/fr_CA', () => {
   expect(minifaker.name())
   expect(minifaker.jobType())
   expect(minifaker.zipCode({ locale: 'fr_CA' }))
+  expect(minifaker.streetPrefix())
+  expect(minifaker.streetAddress())
 })

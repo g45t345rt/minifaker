@@ -32,4 +32,8 @@ test('Test locale en', () => {
   expect(minifaker.email({ provider: 'pm.me' }))
   expect(minifaker.domainUrl())
   expect(minifaker.zipCode())
+  expect(minifaker.streetSuffix())
+  expect(minifaker.streetName())
+  expect(minifaker.streetAddress())
+  expect(minifaker.timeZone())
 })
