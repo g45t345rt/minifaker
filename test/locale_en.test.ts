@@ -1,5 +1,5 @@
 import 'jest'
-import minifaker, { Gender, WordType } from '../src'
+import minifaker, { DirectionType, Gender, WordType } from '../src'
 import '../src/locales/en'
 
 test('Test locale en', () => {
@@ -36,4 +36,7 @@ test('Test locale en', () => {
   expect(minifaker.streetName())
   expect(minifaker.streetAddress())
   expect(minifaker.timeZone())
+  expect(minifaker.direction())
+  expect(minifaker.direction({ useAbbr: true }))
+  expect(minifaker.direction({ type: DirectionType.CARDINAL }))
 })

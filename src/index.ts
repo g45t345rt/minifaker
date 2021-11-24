@@ -371,6 +371,34 @@ export const timeZone = (options: { locale?: string } = {}) => {
   return arrayElement(timeZones)
 }
 
+export const latidude = (): string => {
+  return number({ min: -90, max: 90, float: true }).toFixed(6)
+}
+
+export const longitude = (): string => {
+  return number({ min: -180, max: 180, float: true }).toFixed(6)
+}
+
+export const latLong = (): string => {
+  return `${latidude()}, ${longitude()}`
+}
+
+export enum DirectionType {
+  CARDINAL = 'cardinal',
+  ORDINAL = 'ordinal'
+}
+
+export const direction = (options: { locale?: string, type?: DirectionType, useAbbr?: boolean } = {}): string => {
+  const { locale, type, useAbbr } = options
+
+  const directions = getLocaleData<{ cardinal: string[][], ordinal: string[][] }>({ locale, key: 'directions' })
+  const allDirections = [...directions.cardinal, ...directions.ordinal]
+  const mapValue = (value) => useAbbr ? value[1] : value[0]
+
+  if (type) return arrayElement(directions[type].map(mapValue))
+  return arrayElement(allDirections.map(mapValue))
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -409,5 +437,9 @@ export default {
   streetSuffix,
   streetName,
   streetAddress,
-  timeZone
+  timeZone,
+  latidude,
+  longitude,
+  latLong,
+  direction
 }

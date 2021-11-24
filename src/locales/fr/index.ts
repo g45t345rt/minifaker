@@ -12,6 +12,7 @@ import freeEmails from './internet/freeEmails'
 import postCodeFormats from './address/postCodeFormats'
 import streetPrefixes from './address/streetPrefixes'
 import streetSuffixes from './address/streetSuffixes'
+import directions from './address/directions'
 
 const locale = {
   maleFirstNames,
@@ -25,7 +26,8 @@ const locale = {
   freeEmails,
   postCodeFormats,
   streetPrefixes,
-  streetSuffixes
+  streetSuffixes,
+  directions
 }
 
 minifaker.addLocale('fr', locale)

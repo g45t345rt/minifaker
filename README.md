@@ -109,3 +109,7 @@ streetSuffix|en,fr|streetSuffix
 streetName|en,fr|streetName
 streetAddress|en,fr|streetAddress
 timeZone|en|timeZone
+latidude|n/a|latidude
+longitude|n/a|longitude
+n/a|n/a|latLong
+direction,cardinalDirection,ordinalDirection|en,fr|direction
