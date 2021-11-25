@@ -9,7 +9,6 @@ import cityPrefixes from './address/cityPrefixes'
 import citySuffixes from './address/citySuffixes'
 import lastNames from './name/lastNames'
 import titles from './name/titles'
-
 import adjectives from './word/adjectives'
 import adverbs from './word/adverbs'
 import conjunctions from './word/conjunctions'
@@ -23,6 +22,11 @@ import postCodeFormats from './address/postCodeFormats'
 import streetSuffixes from './address/streetSuffixes'
 import timeZones from './address/timeZones'
 import directions from './address/directions'
+import states from './address/states'
+import stateAbbrs from './address/stateAbbrs'
+import countries from './address/countries'
+import countryCodesAlpha2 from './address/countryCodesAlpha2'
+import countryCodesAlpha3 from './address/countryCodesAlpha3'
 
 const locale = {
   maleFirstNames,
@@ -46,7 +50,12 @@ const locale = {
   postCodeFormats,
   streetSuffixes,
   timeZones,
-  directions
+  directions,
+  states,
+  stateAbbrs,
+  countries,
+  countryCodesAlpha2,
+  countryCodesAlpha3
 }
 
 minifaker.addLocale('en', locale)

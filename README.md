@@ -113,3 +113,5 @@ latidude|n/a|latidude
 longitude|n/a|longitude
 n/a|n/a|latLong
 direction,cardinalDirection,ordinalDirection|en,fr|direction
+state,stateAbbr|en,fr,fr_CA|state
+country,countryCode|en,fr|country

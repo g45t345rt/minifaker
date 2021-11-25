@@ -399,6 +399,36 @@ export const direction = (options: { locale?: string, type?: DirectionType, useA
   return arrayElement(allDirections.map(mapValue))
 }
 
+export const state = (options: { locale?: string, useAbbr?: boolean } = {}): string => {
+  const { locale, useAbbr } = options
+
+  const states = useAbbr ? getLocaleData<string[]>({ locale, key: 'stateAbbrs' }) : getLocaleData<string[]>({ locale, key: 'states' })
+  return arrayElement(states)
+}
+
+export enum CountryCodeType {
+  Alpha2 = 'alpha2',
+  Alpha3 = 'alpha3'
+}
+
+export const country = (options: { locale?: string, useCode?: CountryCodeType } = {}): string => {
+  const { locale, useCode } = options
+
+  const getLocaleDataKey = () => {
+    switch (useCode) {
+      case CountryCodeType.Alpha2:
+        return 'countryCodesAlpha2'
+      case CountryCodeType.Alpha3:
+        return 'countryCodesAlpha3'
+      default:
+        return 'countries'
+    }
+  }
+
+  const countries = getLocaleData<string[]>({ locale, key: getLocaleDataKey() })
+  return arrayElement(countries)
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -441,5 +471,7 @@ export default {
   latidude,
   longitude,
   latLong,
-  direction
+  direction,
+  state,
+  country
 }

@@ -21,4 +21,7 @@ test('Test locale fr/fr_CA', () => {
   expect(minifaker.streetPrefix())
   expect(minifaker.streetAddress())
   expect(minifaker.direction())
+  expect(minifaker.state())
+  expect(minifaker.state({ locale: 'fr_CA' }))
+  expect(minifaker.country())
 })
