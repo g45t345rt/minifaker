@@ -44,4 +44,6 @@ test('Test locale en', () => {
   expect(minifaker.country())
   expect(minifaker.country({ useCode: CountryCodeType.Alpha2 }))
   expect(minifaker.country({ useCode: CountryCodeType.Alpha3 }))
+  expect(minifaker.price())
+  expect(minifaker.price({ min: 500, max: 50000 }))
 })

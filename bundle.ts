@@ -5,7 +5,7 @@ const config = {
     './src/index.ts',
     './src/locales/en/index.ts',
     './src/locales/fr/index.ts',
-    './src/locales/fr_CA/index.ts'
+    './src/locales/fr-CA/index.ts'
   ],
   platform: 'node',
   bundle: true,

@@ -16,6 +16,8 @@ import directions from './address/directions'
 import states from './address/states'
 import countries from './address/countries'
 
+const defaultCurrency = 'EUR'
+
 const locale = {
   maleFirstNames,
   femaleFirstNames,
@@ -31,7 +33,8 @@ const locale = {
   streetSuffixes,
   directions,
   states,
-  countries
+  countries,
+  defaultCurrency
 }
 
 minifaker.addLocale('fr', locale)

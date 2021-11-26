@@ -28,6 +28,8 @@ import countries from './address/countries'
 import countryCodesAlpha2 from './address/countryCodesAlpha2'
 import countryCodesAlpha3 from './address/countryCodesAlpha3'
 
+const defaultCurrency = 'USD'
+
 const locale = {
   maleFirstNames,
   femaleFirstNames,
@@ -55,7 +57,8 @@ const locale = {
   stateAbbrs,
   countries,
   countryCodesAlpha2,
-  countryCodesAlpha3
+  countryCodesAlpha3,
+  defaultCurrency
 }
 
 minifaker.addLocale('en', locale)

@@ -7,15 +7,18 @@ import postCodeFormats from './address/postCodeFormats'
 import states from './address/states'
 import stateAbbrs from './address/stateAbbrs'
 
+const defaultCurrency = 'CAD'
+
 const locale = {
   phoneFormats,
   domainSuffixes,
   freeEmails,
   postCodeFormats,
   stateAbbrs,
-  states
+  states,
+  defaultCurrency
 }
 
-miniflare.addLocale('fr_CA', locale)
+miniflare.addLocale('fr-CA', locale)
 
 export default locale

@@ -1,6 +1,6 @@
 {
   "name": "minifaker",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "description": "lightweight faker.js",
   "types": "./dist/index.d.ts",
   "main": "./dist/index",

@@ -77,7 +77,7 @@ number,float|n/a|number
 boolean|n/a|boolean
 uuid|n/a|use `nanoid`
 firstName|en,fr|firstName
-phoneNumber|en,fr,fr_CA|phoneNumber
+phoneNumber|en,fr,fr-CA|phoneNumber
 cityName|en,fr|cityName
 cityPrefix|en|cityPrefix
 citySuffix|en|citySufix
@@ -99,11 +99,11 @@ ipv6|n/a|ipv6
 color|n/a|color
 username|en,fr|username
 mac|n/a|macAddress
-domainName|en,fr,fr_CA|domainName
-domainSuffix|en,fr,fr_CA|domainSuffix
-email|en,fr,fr_CA|email
-url|en,fr,fr_CA|domainUrl
-zipCode|en,fr,fr_CA|zipCode
+domainName|en,fr,fr-CA|domainName
+domainSuffix|en,fr,fr-CA|domainSuffix
+email|en,fr,fr-CA|email
+url|en,fr,fr-CA|domainUrl
+zipCode|en,fr,fr-CA|zipCode
 streetPrefix|fr|streetPrefix
 streetSuffix|en,fr|streetSuffix
 streetName|en,fr|streetName
@@ -113,5 +113,6 @@ latidude|n/a|latidude
 longitude|n/a|longitude
 n/a|n/a|latLong
 direction,cardinalDirection,ordinalDirection|en,fr|direction
-state,stateAbbr|en,fr,fr_CA|state
+state,stateAbbr|en,fr,fr-CA|state
 country,countryCode|en,fr|country
+price|all|price with `Intl.NumberFormat`

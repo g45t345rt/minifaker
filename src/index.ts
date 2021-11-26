@@ -429,6 +429,15 @@ export const country = (options: { locale?: string, useCode?: CountryCodeType } 
   return arrayElement(countries)
 }
 
+export const price = (options: { locale?: string, min?: number, max?: number, currency?: string } = {}): string => {
+  const { locale: _locale, min, max, currency: _currency } = { min: 0, max: 1000, ...options }
+  // don't use getLocaleData since Intl.NumberFormat already support all locales
+  const locale = _locale || defaultLocale
+  const currency = _currency || (locales[locale] && locales[locale]['defaultCurrency'])
+  const formatter = new Intl.NumberFormat(locale, { style: 'currency', currency })
+  return formatter.format(number({ min, max, float: true }))
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -473,5 +482,6 @@ export default {
   latLong,
   direction,
   state,
-  country
+  country,
+  price
 }
