@@ -116,3 +116,4 @@ direction,cardinalDirection,ordinalDirection|en,fr|direction
 state,stateAbbr|en,fr,fr-CA|state
 country,countryCode|en,fr|country
 price|all|price with `Intl.NumberFormat`
+creditCardNumber|n/a|creditCard

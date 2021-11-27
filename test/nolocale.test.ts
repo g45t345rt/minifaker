@@ -1,5 +1,5 @@
 import 'jest'
-import minifaker, { MacAddressAdministration, MacAddressSeparator, MacAddressTransmission, PlaceImgCategory, PlaceImgFilter } from '../src'
+import minifaker, { MacAddressAdministration, MacAddressSeparator, MacAddressTransmission, PlaceImgCategory, PlaceImgFilter, CreditCardProvider } from '../src'
 
 test('Test function without locale', () => {
   expect(() => minifaker.firstName()).toThrow() // no default locale error
@@ -30,4 +30,15 @@ test('Test function without locale', () => {
   expect(minifaker.latidude())
   expect(minifaker.longitude())
   expect(minifaker.latLong())
+  expect(minifaker.creditCard())
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.AMERICAN_EXPRESS }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.DINERS_CLUB }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.DISCOVER }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.INSTAPAYMENT }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.JCB }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.LASER }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.MAESTRO }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.MASTERCARD }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.SOLO }))
+  console.log(minifaker.creditCard({ provider: CreditCardProvider.VISA }))
 })

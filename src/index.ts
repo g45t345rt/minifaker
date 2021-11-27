@@ -1,3 +1,7 @@
+import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
+import checkLuhn from './helpers/checkLuhn'
+import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
+
 const locales = {}
 let defaultLocale = null
 
@@ -325,23 +329,13 @@ export const domainUrl = (options: { locale?: string } = {}): string => `https:/
 export const zipCode = (options: { locale?: string, format?: string } = {}): string => {
   const { locale, format: _format } = options
 
-  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
   let format = _format
   if (!format) {
     const formats = getLocaleData<string[]>({ locale, key: 'postCodeFormats' })
     format = arrayElement(formats)
   }
 
-  return format.split('').map((c) => {
-    if (c === '#') return number({ max: 9 }).toString()
-    if (c === '?') return arrayElement(alphabet)
-    if (c === '*') {
-      if (boolean()) return arrayElement(alphabet)
-      else return number({ max: 9 }).toString()
-    }
-    return c
-  }).join('')
+  return replaceSymbols(format)
 }
 
 export const streetSuffix = (options: { locale?: string } = {}) => {
@@ -438,6 +432,23 @@ export const price = (options: { locale?: string, min?: number, max?: number, cu
   return formatter.format(number({ min, max, float: true }))
 }
 
+export { CreditCardProvider }
+
+export const creditCard = (options: { provider?: CreditCardProvider } = {}): string => {
+  const { provider } = options
+  const providerFormats = provider ? creditCardProviders[provider] : Object.values(creditCardProviders).flat()
+  let cardNumberFormat = arrayElement<string>(providerFormats)
+  cardNumberFormat = replaceSymbols(cardNumberFormat)
+  cardNumberFormat = replaceRangeSymbols(cardNumberFormat)
+
+  const cardNumbers = cardNumberFormat.replace(/\D/g, '').split('').map(v => parseInt(v)) // remove all special char keep numbers only
+
+  const luhnNumber = checkLuhn(cardNumbers)
+  cardNumberFormat = cardNumberFormat.replace('L', luhnNumber.toString())
+
+  return cardNumberFormat
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -483,5 +494,6 @@ export default {
   direction,
   state,
   country,
-  price
+  price,
+  creditCard
 }

@@ -3,6 +3,7 @@
     "esModuleInterop": true,
     "emitDeclarationOnly": true,
     "declaration": true,
+    "downlevelIteration": true,
     "lib": [
       "ESNext"
     ],
