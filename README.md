@@ -116,4 +116,11 @@ direction,cardinalDirection,ordinalDirection|en,fr|direction
 state,stateAbbr|en,fr,fr-CA|state
 country,countryCode|en,fr|country
 price|all|price with `Intl.NumberFormat`
-creditCardNumber|n/a|creditCard
+creditCardNumber|n/a|creditCardNumber
+creditCardCVV|n/a|creditCardCVV
+semver|n/a|semver
+password|n/a|use `generate-password`
+betweens|n/a|date
+month|en,fr|month
+weekday|en,fr|weekday
+date|all|date

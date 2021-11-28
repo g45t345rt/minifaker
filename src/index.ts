@@ -434,7 +434,7 @@ export const price = (options: { locale?: string, min?: number, max?: number, cu
 
 export { CreditCardProvider }
 
-export const creditCard = (options: { provider?: CreditCardProvider } = {}): string => {
+export const creditCardNumber = (options: { provider?: CreditCardProvider } = {}): string => {
   const { provider } = options
   const providerFormats = provider ? creditCardProviders[provider] : Object.values(creditCardProviders).flat()
   let cardNumberFormat = arrayElement<string>(providerFormats)
@@ -447,6 +447,38 @@ export const creditCard = (options: { provider?: CreditCardProvider } = {}): str
   cardNumberFormat = cardNumberFormat.replace('L', luhnNumber.toString())
 
   return cardNumberFormat
+}
+
+export const creditCardCVV = (): string => {
+  return array(3, () => number({ max: 9 })).join('')
+}
+
+export const semver = () => {
+  return [number({ max: 9 }), number({ max: 20 }), number({ max: 99 })].join('.')
+}
+
+export const month = (options: { locale?: string, useAbbr?: boolean } = {}) => {
+  const { locale, useAbbr } = options
+  const months = getLocaleData<{ wide: string[], abbr: string[] }>({ locale, key: 'months' })
+  const { wide, abbr } = months
+  return arrayElement(useAbbr ? abbr : wide)
+}
+
+export const weekday = (options: { locale?: string, useAbbr?: boolean } = {}) => {
+  const { locale, useAbbr } = options
+  const weekdays = getLocaleData<{ wide: string[], abbr: string[] }>({ locale, key: 'weekdays' })
+  const { wide, abbr } = weekdays
+  return arrayElement(useAbbr ? abbr : wide)
+}
+
+export const date = (options: { from?: Date, to?: Date } = {}) => {
+  const { from: _from, to: _to } = options
+  const from = _from || new Date(0) // epoch start 1970-01-01
+  const to = _to || new Date() // current date
+
+  const fromEpoch = from.getTime()
+  const toEpoch = to.getTime()
+  return new Date(number({ min: fromEpoch, max: toEpoch }))
 }
 
 export default {
@@ -495,5 +527,10 @@ export default {
   state,
   country,
   price,
-  creditCard
+  creditCardNumber,
+  creditCardCVV,
+  semver,
+  month,
+  weekday,
+  date
 }

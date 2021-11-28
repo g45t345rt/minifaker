@@ -27,6 +27,8 @@ import stateAbbrs from './address/stateAbbrs'
 import countries from './address/countries'
 import countryCodesAlpha2 from './address/countryCodesAlpha2'
 import countryCodesAlpha3 from './address/countryCodesAlpha3'
+import months from './date/months'
+import weekdays from './date/weekdays'
 
 const defaultCurrency = 'USD'
 
@@ -58,7 +60,9 @@ const locale = {
   countries,
   countryCodesAlpha2,
   countryCodesAlpha3,
-  defaultCurrency
+  defaultCurrency,
+  months,
+  weekdays
 }
 
 minifaker.addLocale('en', locale)

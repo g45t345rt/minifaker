@@ -27,4 +27,8 @@ test('Test locale fr/fr-CA', () => {
   expect(minifaker.price())
   expect(minifaker.price({ locale: 'fr-CA' }))
   expect(minifaker.price({ locale: 'en-CA', currency: 'CAD' }))
+  expect(minifaker.month())
+  expect(minifaker.weekday())
+  expect(minifaker.month({ useAbbr: true }))
+  expect(minifaker.weekday({ useAbbr: true }))
 })

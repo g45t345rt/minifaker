@@ -15,6 +15,8 @@ import streetSuffixes from './address/streetSuffixes'
 import directions from './address/directions'
 import states from './address/states'
 import countries from './address/countries'
+import months from './date/months'
+import weekdays from './date/weekdays'
 
 const defaultCurrency = 'EUR'
 
@@ -34,7 +36,9 @@ const locale = {
   directions,
   states,
   countries,
-  defaultCurrency
+  defaultCurrency,
+  months,
+  weekdays
 }
 
 minifaker.addLocale('fr', locale)
