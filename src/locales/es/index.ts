@@ -5,34 +5,24 @@ import maleFirstNames from './name/maleFirstNames'
 import femaleFirstNames from './name/femaleFirstNames'
 import phoneFormats from './phone/formats'
 import cityNames from './address/cityNames'
-import cityPrefixes from './address/cityPrefixes'
-import citySuffixes from './address/citySuffixes'
 import lastNames from './name/lastNames'
 import titles from './name/titles'
-import adjectives from './word/adjectives'
-import adverbs from './word/adverbs'
-import conjunctions from './word/conjunctions'
-import interjections from './word/interjections'
-import nouns from './word/nouns'
-import prepositions from './word/prepositions'
-import verbs from './word/verbs'
 import domainSuffixes from './internet/domainSuffixes'
 import freeEmails from './internet/freeEmails'
 import postCodeFormats from './address/postCodeFormats'
+import streetPrefixes from './address/streetPrefixes'
 import streetSuffixes from './address/streetSuffixes'
-import timeZones from './address/timeZones'
 import directions from './address/directions'
 import states from './address/states'
-import stateAbbrs from './address/stateAbbrs'
 import countries from './address/countries'
-import countryCodesAlpha2 from './address/countryCodesAlpha2'
-import countryCodesAlpha3 from './address/countryCodesAlpha3'
 import months from './date/months'
 import weekdays from './date/weekdays'
+import timeZones from './address/timeZones'
+import nouns from './word/nouns'
 
-const defaultCurrency = 'USD'
-const defaultCountry = 'United State of America'
-const title = 'English'
+const defaultCurrency = 'EUR'
+const defaultCountry = 'España'
+const title = 'Spanish'
 
 const locale = {
   maleFirstNames,
@@ -40,34 +30,24 @@ const locale = {
   firstNames,
   phoneFormats,
   cityNames,
-  cityPrefixes,
-  citySuffixes,
   lastNames,
   ...titles,
-  adjectives,
-  adverbs,
-  conjunctions,
-  interjections,
-  nouns,
-  prepositions,
-  verbs,
   domainSuffixes,
   freeEmails,
   postCodeFormats,
+  streetPrefixes,
   streetSuffixes,
-  timeZones,
   directions,
   states,
-  stateAbbrs,
   countries,
-  countryCodesAlpha2,
-  countryCodesAlpha3,
   defaultCurrency,
   months,
   weekdays,
-  defaultCountry
+  defaultCountry,
+  timeZones,
+  nouns
 }
 
-minifaker.addLocale('en', locale)
+minifaker.addLocale('es', locale)
 
 export default locale

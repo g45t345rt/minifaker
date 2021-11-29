@@ -9,7 +9,7 @@ export default {
     'junio',
     'julio',
     'agosto',
-    'septiembre',
+    'setiembre',
     'octubre',
     'noviembre',
     'diciembre',

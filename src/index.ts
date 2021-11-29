@@ -13,12 +13,8 @@ const throwNoLocale = (locale: string) => {
   throw new Error(`The locale [${locale}] is not imported or supported.`)
 }
 
-const throwNotLocaleData = (locale: string, key: string) => {
+const throwNoLocaleData = (locale: string, key: string) => {
   throw new Error(`The locale [${locale}] data of [${key}] doest not exists. Mostly not implemented yet!.`)
-}
-
-const throwNotImplemented = () => {
-  throw new Error(`Not implemented yet.`)
 }
 
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
@@ -28,7 +24,7 @@ const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: stri
   if (!locales[locale]) throwNoLocale(locale)
 
   const localeData = locales[locale]
-  if (!localeData[key]) throwNotLocaleData(locale, key)
+  if (!localeData[key]) throwNoLocaleData(locale, key)
   return localeData[key]
 }
 
@@ -100,10 +96,6 @@ export const phoneNumber = (options: { locale?: string, formats?: string[] } = {
     if (c === '#') return number({ max: 9 })
     return c
   }).join('')
-}
-
-export const city = (options: { locale?: string } = {}): string => {
-  return throwNotImplemented()
 }
 
 export const cityName = (options: { locale?: string } = {}): string => {
@@ -492,7 +484,6 @@ export default {
   firstName,
   arrayElement,
   boolean,
-  city,
   imageUrlFromPlaceIMG,
   imageUrlFromPlaceholder,
   objectElement,

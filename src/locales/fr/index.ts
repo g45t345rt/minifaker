@@ -17,8 +17,12 @@ import states from './address/states'
 import countries from './address/countries'
 import months from './date/months'
 import weekdays from './date/weekdays'
+import nouns from './word/nouns'
+import timeZones from '../en/address/timeZones' // TODO it's in english for now
 
 const defaultCurrency = 'EUR'
+const defaultCountry = 'France'
+const title = 'French'
 
 const locale = {
   maleFirstNames,
@@ -38,7 +42,10 @@ const locale = {
   countries,
   defaultCurrency,
   months,
-  weekdays
+  weekdays,
+  defaultCountry,
+  nouns,
+  timeZones
 }
 
 minifaker.addLocale('fr', locale)

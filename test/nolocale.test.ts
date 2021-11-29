@@ -1,7 +1,12 @@
 import 'jest'
-import minifaker, { MacAddressAdministration, MacAddressSeparator, MacAddressTransmission, PlaceImgCategory, PlaceImgFilter, CreditCardProvider } from '../src'
+
+import minifaker, {
+  MacAddressAdministration, MacAddressSeparator, MacAddressTransmission,
+  PlaceImgCategory, PlaceImgFilter, CreditCardProvider
+} from '../src'
 
 test('Test function without locale', () => {
+  expect(() => minifaker.setDefaultLocale('alien')).toThrow()
   expect(() => minifaker.firstName()).toThrow() // no default locale error
   expect(minifaker.number()).toBeLessThanOrEqual(1)
   expect(minifaker.number({ float: true }))

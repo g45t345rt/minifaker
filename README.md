@@ -8,6 +8,10 @@ An alternative to faker.js but with cjs or esm syntax
 
 `npm i minifaker`
 
+## Supported locales
+
+`en` | `fr`, `fr-CA` | `es`
+
 ## Why
 
 faker.js is too big and it's not currently supporting tree shaking.
@@ -25,8 +29,9 @@ I also want to use Typescript and introduce new functions.
 
 I will deprecate functions with better alternatives.
 
-- use `npm i nanoid` to generate string ID
-- use `npm i lorem-ipsum` to generate lorem words  
+- instead of `uuid()` use `npm i nanoid` to generate string ID
+- instead of `lorem()` use `npm i lorem-ipsum` to generate lorem words  
+- instead of `password()` use `npm i generate-password` to generate unique passwords
 
 ### Duplicates
 

@@ -1,4 +1,6 @@
 export default {
+  jobDescriptors: [],
+  jobLevels: [],
   jobTypes: [
     "Superviseur",
     "Executif",
