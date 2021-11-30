@@ -1,8 +1,7 @@
 import { number, boolean, arrayElement, array } from '../index'
 
-export const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
 export const replaceSymbols = (value: string): string => {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   return value.split('').map((c) => {
     if (c === '#') return number({ max: 9 }).toString()
     if (c === '?') return arrayElement(alphabet)

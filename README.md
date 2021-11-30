@@ -129,3 +129,4 @@ betweens|n/a|date
 month|en,fr|month
 weekday|en,fr|weekday
 date|all|date
+bitcoinAddress|n/a|bitcoinAddress

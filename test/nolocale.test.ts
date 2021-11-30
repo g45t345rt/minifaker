@@ -53,4 +53,5 @@ test('Test function without locale', () => {
   expect(minifaker.date({ from: new Date('2012-01'), to: new Date('2012-02') }))
   // month 0 is january ??? -> https://stackoverflow.com/questions/2552483/why-does-the-month-argument-range-from-0-to-11-in-javascripts-date-constructor
   expect(minifaker.date({ from: new Date(2012, 0, 1), to: new Date(2012, 0, 5) }))
+  expect(minifaker.bitcoinAddress())
 })

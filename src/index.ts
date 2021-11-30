@@ -473,6 +473,13 @@ export const date = (options: { from?: Date, to?: Date } = {}) => {
   return new Date(number({ min: fromEpoch, max: toEpoch }))
 }
 
+export const bitcoinAddress = (): string => {
+  const prefix = arrayElement(['1', '3', 'bc1'])
+  const count = number({ min: 27, max: 34 })
+  const characters = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ' // without 0, O, I, and l.
+  return `${prefix}${array(count, () => arrayElement(characters.split(''))).join('')}`
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -523,5 +530,6 @@ export default {
   semver,
   month,
   weekday,
-  date
+  date,
+  bitcoinAddress
 }
