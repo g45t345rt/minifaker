@@ -125,8 +125,12 @@ creditCardNumber|n/a|creditCardNumber
 creditCardCVV|n/a|creditCardCVV
 semver|n/a|semver
 password|n/a|use `generate-password`
-betweens|n/a|date
 month|en,fr|month
 weekday|en,fr|weekday
 date|all|date
 bitcoinAddress|n/a|bitcoinAddress
+fileExt,commonFileExt|n/a|fileExt
+fileName,commonFileName|en|fileName
+filePath|en|filePath
+mimeType,commonMimeType|n/a|mimeType
+dirPath|n/a|dirPath

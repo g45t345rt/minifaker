@@ -29,6 +29,8 @@ test('Test locales all', () => {
       expect(minifaker.state({ useAbbr: true }))
       expect(minifaker.country({ useCode: CountryCodeType.Alpha2 }))
       expect(minifaker.country({ useCode: CountryCodeType.Alpha3 }))
+      console.log(minifaker.fileName())
+      console.log(minifaker.filePath())
     }
 
     if (locale === 'fr' || locale === 'es') {

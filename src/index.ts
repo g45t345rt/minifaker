@@ -1,6 +1,8 @@
 import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
 import checkLuhn from './helpers/checkLuhn'
 import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
+import dirPaths from './data/dirPaths'
+import commonMimeTypes from './data/commonMimeTypes'
 
 const locales = {}
 let defaultLocale = null
@@ -480,6 +482,28 @@ export const bitcoinAddress = (): string => {
   return `${prefix}${array(count, () => arrayElement(characters.split(''))).join('')}`
 }
 
+// Using commonMimeTypes because it's smaller and we don't need all of them to generate fake data - The full is still in the package but not exported => ./data/mimeType
+export const mimeType = (): string => {
+  return arrayElement(Object.values(commonMimeTypes))
+}
+
+export const fileExt = () => {
+  return arrayElement(Object.keys(commonMimeTypes))
+}
+
+export const dirPath = (): string => {
+  return arrayElement(dirPaths)
+}
+
+export const fileName = (): string => {
+  const words = array(number({ max: 3 }), () => word())
+  return `${words.join('_').toLocaleLowerCase()}${fileExt()}`
+}
+
+export const filePath = (): string => {
+  return `${dirPath()}/${fileName()}`
+}
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -531,5 +555,10 @@ export default {
   month,
   weekday,
   date,
-  bitcoinAddress
+  bitcoinAddress,
+  mimeType,
+  fileExt,
+  dirPath,
+  filePath,
+  fileName
 }
