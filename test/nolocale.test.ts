@@ -6,6 +6,7 @@ import minifaker, {
 } from '../src'
 
 test('Test function without locale', () => {
+  minifaker.setSeed('testing')
   expect(() => minifaker.setDefaultLocale('alien')).toThrow()
   expect(() => minifaker.firstName()).toThrow() // no default locale error
   expect(minifaker.number()).toBeLessThanOrEqual(1)
@@ -54,7 +55,7 @@ test('Test function without locale', () => {
   // month 0 is january ??? -> https://stackoverflow.com/questions/2552483/why-does-the-month-argument-range-from-0-to-11-in-javascripts-date-constructor
   expect(minifaker.date({ from: new Date(2012, 0, 1), to: new Date(2012, 0, 5) }))
   expect(minifaker.bitcoinAddress())
-  console.log(minifaker.fileExt())
-  console.log(minifaker.dirPath())
-  console.log(minifaker.mimeType())
+  expect(minifaker.fileExt())
+  expect(minifaker.dirPath())
+  expect(minifaker.mimeType())
 })

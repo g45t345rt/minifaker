@@ -1,3 +1,6 @@
+import seedrandom from 'seedrandom'
+// seedrandom().quick() is 1.8x faster than native Math.random() + I can set a seed :)
+
 import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
 import checkLuhn from './helpers/checkLuhn'
 import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
@@ -6,6 +9,7 @@ import commonMimeTypes from './data/commonMimeTypes'
 
 const locales = {}
 let defaultLocale = null
+let random = seedrandom()
 
 const throwNoDefaultLocale = () => {
   throw new Error(`No default locale defined. Import at least one locale!`)
@@ -17,6 +21,10 @@ const throwNoLocale = (locale: string) => {
 
 const throwNoLocaleData = (locale: string, key: string) => {
   throw new Error(`The locale [${locale}] data of [${key}] doest not exists. Mostly not implemented yet!.`)
+}
+
+const setSeed = (seed: string) => {
+  random = seedrandom(seed)
 }
 
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
@@ -43,7 +51,7 @@ export const setDefaultLocale = (locale: string) => {
 
 export const number = (options: { min?: number, max?: number, float?: boolean } = {}): number => {
   const { min, max, float } = { min: 0, max: 1, float: false, ...options }
-  const value = min + Math.random() * (max - min)
+  const value = min + random.quick() * (max - min)
   if (!float) return Math.round(value)
   return value
 }
@@ -560,5 +568,6 @@ export default {
   fileExt,
   dirPath,
   filePath,
-  fileName
+  fileName,
+  setSeed
 }
