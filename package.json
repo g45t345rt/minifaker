@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "jest --coverage",
-    "build": "ts-node bundle.ts && tsc ./src/index.ts --declaration --emitDeclarationOnly --downlevelIteration --outdir dist",
+    "build": "ts-node bundle.ts && tsc ./src/index.ts --declaration --emitDeclarationOnly --downlevelIteration --esModuleInterop --outdir dist",
     "prepublishOnly": "npm run build"
   },
   "repository": {
