@@ -9,7 +9,8 @@ const config = {
     './src/locales/es/index.ts'
   ],
   platform: 'node',
-  bundle: true
+  bundle: true,
+  external: ['*/../index'] // for accessing minifaker in locales folder
 } as esbuild.BuildOptions
 
 const formats = {
