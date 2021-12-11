@@ -1,5 +1,3 @@
-import 'jest'
-
 import minifaker, {
   MacAddressAdministration, MacAddressSeparator, MacAddressTransmission,
   PlaceImgCategory, PlaceImgFilter, CreditCardProvider

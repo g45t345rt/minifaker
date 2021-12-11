@@ -1,4 +1,3 @@
-import 'jest'
 import 'jest-extended'
 
 import checkLuhn from '../src/helpers/checkLuhn'

@@ -5,11 +5,11 @@ const config = {
     './src/index.ts',
     './src/locales/en/index.ts',
     './src/locales/fr/index.ts',
-    './src/locales/fr-CA/index.ts'
+    './src/locales/fr-CA/index.ts',
+    './src/locales/es/index.ts'
   ],
   platform: 'node',
-  bundle: true,
-  external: ['*/index']
+  bundle: true
 } as esbuild.BuildOptions
 
 const formats = {

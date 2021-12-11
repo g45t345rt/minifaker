@@ -1,5 +1,3 @@
-import 'jest'
-
 import minifaker, { CountryCodeType, DirectionType, Gender, WordType } from '../src'
 import '../src/locales/en'
 import '../src/locales/fr'
