@@ -74,9 +74,9 @@ array(50, () => name())
 ### Direct access to more performant/popular packages
 
 ```ts
-import { nanoid, uuid, password } from 'minifaker'
+import { nanoId, uuid, password } from 'minifaker'
 
-nanoid.nanoid()
+nanoId.nanoid()
 uuid.v4()
 password.generate()
 ```
@@ -89,7 +89,7 @@ random.arrayElement|n/a|arrayElement
 random.number,random.float|n/a|number
 random.boolean|n/a|boolean
 random.uuid|n/a|uuid -> `uuid` funcs
-n/a|n/a|nanoid -> `nanoid` funcs
+n/a|n/a|nanoid -> `nanoId` funcs
 name.firstName|en,fr|firstName
 phone.phoneNumber|en,fr,fr-CA|phoneNumber
 address.cityName|en,fr|cityName
