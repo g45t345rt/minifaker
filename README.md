@@ -14,8 +14,10 @@ An alternative to faker.js but with cjs or esm syntax
 
 ## Why
 
-faker.js is too big and it's not currently supporting tree shaking.
+faker.js is big, does not support tree shaking and is not in Typescript
 <https://github.com/Marak/faker.js/issues/785>
+
+On 2021/01/05, Marak deleted fakerjs from npm and github.
 
 ### Why not create a pull request to faker.js?
 
@@ -25,18 +27,14 @@ Right now, I just need a couple of functions and it's faster to create a new pac
 
 I also want to use Typescript and introduce new functions.
 
-### Better function alternatives
-
-I will deprecate functions with better alternatives.
-
-- instead of `uuid()` use `npm i nanoid` to generate string ID
-- instead of `lorem()` use `npm i lorem-ipsum` to generate lorem words  
-- instead of `password()` use `npm i generate-password` to generate unique passwords
-
 ### Duplicates
 
 I've notice that faker locales have duplicate words :S.  
 I'll try fix the duplicates when importing locale files to reduce size as much as possible.
+
+### Replacing old functions with new powerful packages instead
+
+- nanoid, uuid, generate-password
 
 ## Example / usage
 
@@ -73,65 +71,76 @@ import 'minifaker/dist/locales/en'
 array(50, () => name())
 ```
 
+### Direct access to more performant/popular packages
+
+```ts
+import { nanoid, uuid, password } from 'minifaker'
+
+nanoid.nanoid()
+uuid.v4()
+password.generate()
+```
+
 ## Function mapping
 
 |Faker.js|Locales|Func|
 |-|-|-|
-arrayElement|n/a|arrayElement
-number,float|n/a|number
-boolean|n/a|boolean
-uuid|n/a|use `nanoid`
-firstName|en,fr|firstName
-phoneNumber|en,fr,fr-CA|phoneNumber
-cityName|en,fr|cityName
-cityPrefix|en|cityPrefix
-citySuffix|en|citySufix
-imageUrl|n/a|imageUrlFromPlaceIMG
-imageUrl|n/a|imageUrlFromPlaceholder
-lorem|n/a|use `lorem-ipsum`
-objectElement|n/a|objectElement
+random.arrayElement|n/a|arrayElement
+random.number,random.float|n/a|number
+random.boolean|n/a|boolean
+random.uuid|n/a|uuid -> `uuid` funcs
+n/a|n/a|nanoid -> `nanoid` funcs
+name.firstName|en,fr|firstName
+phone.phoneNumber|en,fr,fr-CA|phoneNumber
+address.cityName|en,fr|cityName
+address.cityPrefix|en|cityPrefix
+address.citySuffix|en|citySufix
+image.imageUrl|n/a|imageUrlFromPlaceIMG
+image.imageUrl|n/a|imageUrlFromPlaceholder
+lorem|n/a|todo
+random.objectElement|n/a|objectElement
 n/a|n/a|array
-lastName|en,fr|lastName
-jobTitle|en|jobTitle
-jobArea|en|jobArea
-jobDescriptor|en|jobDescriptor
-jobType|en,fr|jobType
-name|en,fr|name
-ip|n/a|ip
-port|n/a|port
+name.lastName|en,fr|lastName
+name.jobTitle|en|jobTitle
+name.jobArea|en|jobArea
+name.jobDescriptor|en|jobDescriptor
+name.jobType|en,fr|jobType
+n/a|en,fr|name
+internet.ip|n/a|ip
+internet.port|n/a|port
 adjective,adverb,conjunction,  interjection,noun,preposition,verb|en|word
-ipv6|n/a|ipv6
-color|n/a|color
-username|en,fr|username
-mac|n/a|macAddress
-domainName|en,fr,fr-CA|domainName
-domainSuffix|en,fr,fr-CA|domainSuffix
-email|en,fr,fr-CA|email
-url|en,fr,fr-CA|domainUrl
-zipCode|en,fr,fr-CA|zipCode
-streetPrefix|fr|streetPrefix
-streetSuffix|en,fr|streetSuffix
-streetName|en,fr|streetName
-streetAddress|en,fr|streetAddress
-timeZone|en|timeZone
-latidude|n/a|latidude
-longitude|n/a|longitude
+internet.ipv6|n/a|ipv6
+internet.color|n/a|color
+internet.username|en,fr|username
+internet.mac|n/a|macAddress
+internet.domainName|en,fr,fr-CA|domainName
+internet.domainSuffix|en,fr,fr-CA|domainSuffix
+internet.email|en,fr,fr-CA|email
+internet.url|en,fr,fr-CA|domainUrl
+address.zipCode|en,fr,fr-CA|zipCode
+address.streetPrefix|fr|streetPrefix
+address.streetSuffix|en,fr|streetSuffix
+address.streetName|en,fr|streetName
+address.streetAddress|en,fr|streetAddress
+address.timeZone|en|timeZone
+address.latidude|n/a|latidude
+address.longitude|n/a|longitude
 n/a|n/a|latLong
-direction,cardinalDirection,ordinalDirection|en,fr|direction
-state,stateAbbr|en,fr,fr-CA|state
-country,countryCode|en,fr|country
-price|all|price with `Intl.NumberFormat`
-creditCardNumber|n/a|creditCardNumber
-creditCardCVV|n/a|creditCardCVV
-semver|n/a|semver
-password|n/a|use `generate-password`
-month|en,fr|month
-weekday|en,fr|weekday
+address.direction,address.cardinalDirection,address.ordinalDirection|en,fr|direction
+address.state,address.stateAbbr|en,fr,fr-CA|state
+address.country,address.countryCode|en,fr|country
+commerce.price|all|price with `Intl.NumberFormat`
+finance.creditCardNumber|n/a|creditCardNumber
+finance.creditCardCVV|n/a|creditCardCVV
+system.semver|n/a|semver
+internet.password|n/a|password -> `generate-password` funcs
+date.month|en,fr|month
+date.weekday|en,fr|weekday
 date|all|date
-bitcoinAddress|n/a|bitcoinAddress
-fileExt,commonFileExt|n/a|fileExt
-fileName,commonFileName|en|fileName
-filePath|en|filePath
-mimeType,commonMimeType|n/a|mimeType
-dirPath|n/a|dirPath
+finance.bitcoinAddress|n/a|bitcoinAddress
+system.fileExt,commonFileExt|n/a|fileExt
+system.fileName,commonFileName|en|fileName
+system.filePath|en|filePath
+system.mimeType,commonMimeType|n/a|mimeType
+system.dirPath|n/a|dirPath
 seed|n/a|setSeed

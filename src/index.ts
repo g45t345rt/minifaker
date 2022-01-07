@@ -1,6 +1,10 @@
-import seedrandom from 'seedrandom'
-// seedrandom().quick() is 1.8x faster than native Math.random() + I can set a seed :)
+// Packages
+import _seedrandom from 'seedrandom' // seedrandom().quick() is 1.8x faster than native Math.random() + I can set a seed :)
+import _nanoid from 'nanoid'
+import * as _uuid from 'uuid'
+import _generatePassword from 'generate-password'
 
+// Helpers and data
 import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
 import checkLuhn from './helpers/checkLuhn'
 import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
@@ -9,7 +13,7 @@ import commonMimeTypes from './data/commonMimeTypes'
 
 const locales = {}
 let defaultLocale = null
-let random = seedrandom()
+let random = _seedrandom()
 
 const throwNoDefaultLocale = () => {
   throw new Error(`No default locale defined. Import at least one locale!`)
@@ -24,7 +28,7 @@ const throwNoLocaleData = (locale: string, key: string) => {
 }
 
 const setSeed = (seed: string) => {
-  random = seedrandom(seed)
+  random = _seedrandom(seed)
 }
 
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
@@ -37,6 +41,10 @@ const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: stri
   if (!localeData[key]) throwNoLocaleData(locale, key)
   return localeData[key]
 }
+
+export const nanoId = _nanoid
+export const uuid = _uuid
+export const password = _generatePassword
 
 export const addLocale = (name: string, locale) => {
   const noLocales = Object.keys(locales).length === 0
@@ -569,5 +577,8 @@ export default {
   dirPath,
   filePath,
   fileName,
-  setSeed
+  setSeed,
+  nanoId,
+  uuid,
+  password
 }

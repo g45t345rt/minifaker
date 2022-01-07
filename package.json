@@ -1,6 +1,6 @@
 {
   "name": "minifaker",
-  "version": "1.25.0",
+  "version": "1.26.0",
   "description": "lightweight faker.js",
   "types": "./dist/index.d.ts",
   "main": "./dist/index",
@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "build": "ts-node bundle.ts && tsc ./src/index.ts --declaration --emitDeclarationOnly --downlevelIteration --esModuleInterop --outdir dist",
     "prepublishOnly": "npm run build"
   },
@@ -25,12 +25,16 @@
     "@types/jest": "^27.0.3",
     "@types/seedrandom": "^3.0.1",
     "esbuild": "^0.14.2",
+    "generate-password": "^1.7.0",
     "jest": "^27.4.4",
     "jest-extended": "^1.2.0",
+    "seedrandom": "^3.0.5",
     "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0"
   },
   "dependencies": {
-    "seedrandom": "^3.0.5"
+    "@types/uuid": "^8.3.4",
+    "nanoid": "^3.1.30",
+    "uuid": "^8.3.2"
   }
 }
