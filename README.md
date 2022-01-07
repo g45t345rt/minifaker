@@ -87,11 +87,12 @@ word({ type: WordType.NOUN }) // A noun
 ### Direct access to more performant/popular packages
 
 ```ts
-import { nanoId, uuid, password } from 'minifaker'
+import { nanoId, uuid, password, nonsecure } from 'minifaker'
 
-nanoId.nanoid()
-uuid.v4()
-password.generate()
+nanoId.nanoid() // nanoid - https://github.com/ai/nanoid
+nonsecure.nanoid() // nanoid/non-secure - https://github.com/ai/nanoid/blob/main/non-secure/index.js
+uuid.v4() // uuid - https://github.com/uuidjs/uuid
+password.generate() // generate-password - https://github.com/brendanashworth/generate-password
 ```
 
 ## Function mapping

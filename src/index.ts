@@ -1,6 +1,7 @@
 // Packages
 import _seedrandom from 'seedrandom' // seedrandom().quick() is 1.8x faster than native Math.random() + I can set a seed :)
 import * as _nanoid from 'nanoid'
+import * as _nanoid_nonsecure from 'nanoid/non-secure'
 import * as _uuid from 'uuid'
 import _generatePassword from 'generate-password'
 
@@ -43,6 +44,7 @@ const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: stri
 }
 
 export const nanoId = _nanoid
+export const nonsecure = _nanoid_nonsecure
 export const uuid = _uuid
 export const password = _generatePassword
 
@@ -587,5 +589,6 @@ export default {
   hex,
   nanoId,
   uuid,
-  password
+  password,
+  nonsecure
 }
