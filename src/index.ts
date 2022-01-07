@@ -223,6 +223,12 @@ export const color = (options: { r?: number, g?: number, b?: number } = {}): str
   return `#${hexPadLeft(red)}${hexPadLeft(green)}${hexPadLeft(blue)}`
 }
 
+export const hex = (count: number = 1) => {
+  let hexString = ''
+  array(count, () => hexString += number({ max: 15 }).toString(16))
+  return `0x${hexString}` // 0x is the prefix used to denote hexadecimal
+}
+
 export enum WordType {
   VERB = 'verb',
   PREPOSITION = 'preposition',
@@ -578,6 +584,7 @@ export default {
   filePath,
   fileName,
   setSeed,
+  hex,
   nanoId,
   uuid,
   password

@@ -144,3 +144,4 @@ system.filePath|en|filePath
 system.mimeType,commonMimeType|n/a|mimeType
 system.dirPath|n/a|dirPath
 seed|n/a|setSeed
+hexaDecimal|n/a|hex

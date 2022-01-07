@@ -56,6 +56,8 @@ test('Test function without locale', () => {
   expect(minifaker.fileExt())
   expect(minifaker.dirPath())
   expect(minifaker.mimeType())
+  expect(minifaker.hex())
+  expect(minifaker.hex(10))
 
   // Other packages
   expect(minifaker.nanoId.nanoid())
