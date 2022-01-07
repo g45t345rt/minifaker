@@ -71,6 +71,19 @@ import 'minifaker/dist/locales/en'
 array(50, () => name())
 ```
 
+### Generating english words
+
+```ts
+import { word, WordType } from 'minifaker'
+import 'minifaker/dist/locales/en'
+
+word() // Can be an adjective, adverb, conjunction, interjection, noun, preposition, verb
+word({ filter: (word) => word.length > 5 }) // Word with at least 5 characters
+word({ type: WordType.NOUN }) // A noun
+```
+
+`WordType.VERB`,`WordType.PREPOSITION`,`WordType.NOUN`,`WordType.INTERJECTION`,`WordType.CONJUNCTION`,`WordType.ADVERB`,`WordType.ADJECTIVE`
+
 ### Direct access to more performant/popular packages
 
 ```ts
