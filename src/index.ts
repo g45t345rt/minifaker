@@ -1,6 +1,6 @@
 // Packages
 import _seedrandom from 'seedrandom' // seedrandom().quick() is 1.8x faster than native Math.random() + I can set a seed :)
-import _nanoid from 'nanoid'
+import * as _nanoid from 'nanoid'
 import * as _uuid from 'uuid'
 import _generatePassword from 'generate-password'
 
