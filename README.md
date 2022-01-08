@@ -53,12 +53,12 @@ arrayElement(['one', 'two', 'three'])
 ### Using locale dependent functions
 
 ```ts
-import minifaker, { cityName, Gender } from 'minifaker'
+import minifaker, { cityName } from 'minifaker'
 // There is no default locale import (not even `english`)
 import 'minifaker/dist/locales/en' // the first locale import is set as default
 import 'minifaker/dist/locales/fr'
 
-minifaker.firstName({ gender: Gender.FEMALE }) // female name in english
+minifaker.firstName({ gender: 'female' }) // female name in english
 cityName({ locale: 'fr' }) // french city name
 ```
 
@@ -74,15 +74,17 @@ array(50, () => name())
 ### Generating english words
 
 ```ts
-import { word, WordType } from 'minifaker'
+import { word } from 'minifaker'
 import 'minifaker/dist/locales/en'
 
 word() // Can be an adjective, adverb, conjunction, interjection, noun, preposition, verb
 word({ filter: (word) => word.length > 5 }) // Word with at least 5 characters
-word({ type: WordType.NOUN }) // A noun
+word({ type: 'noun' }) // A noun
 ```
 
-`WordType.VERB`,`WordType.PREPOSITION`,`WordType.NOUN`,`WordType.INTERJECTION`,`WordType.CONJUNCTION`,`WordType.ADVERB`,`WordType.ADJECTIVE`
+#### Word types
+
+`verb`,`preposition`,`noun`, `interjection`, `conjunction`, `adverb`, `adjective`
 
 ### Direct access to more performant/popular packages
 

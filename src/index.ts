@@ -6,7 +6,7 @@ import * as _uuid from 'uuid'
 import * as _generatePassword from 'generate-password'
 
 // Helpers and data
-import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
+import creditCardProviders from './data/creditCardProviders'
 import checkLuhn from './helpers/checkLuhn'
 import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
 import dirPaths from './data/dirPaths'
@@ -20,7 +20,7 @@ const throwNoDefaultLocale = () => {
   throw new Error(`No default locale defined. Import at least one locale!`)
 }
 
-const throwNoLocale = (locale: string) => {
+const throwNoLocale = (locale) => {
   throw new Error(`The locale [${locale}] is not imported or supported.`)
 }
 
@@ -89,18 +89,15 @@ export const objectElement = (obj: any): { key: string, value: unknown } => {
   return { key, value: obj[key] }
 }
 
-export enum Gender {
-  MALE = 'male',
-  FEMALE = 'female'
-}
+type Gender = 'male' | 'female'
 
 export const firstName = (options: { locale?: string, gender?: Gender } = {}): string => {
   const { locale, gender } = options
   switch (gender) {
-    case Gender.FEMALE:
+    case 'female':
       const femaleFirstNames = getLocaleData<string[]>({ locale, key: 'femaleFirstNames' })
       return arrayElement(femaleFirstNames)
-    case Gender.MALE:
+    case 'male':
       const maleFirstNames = getLocaleData<string[]>({ locale, key: 'maleFirstNames' })
       return arrayElement(maleFirstNames)
     default:
@@ -136,22 +133,11 @@ export const citySuffix = (options: { locale?: string } = {}): string => {
   return arrayElement<string>(citySuffixes)
 }
 
-export enum PlaceImgCategory {
-  ANY = 'any',
-  ANIMALS = 'animals',
-  ARCHITECTURE = 'architecture',
-  NATURE = 'nature',
-  PEOPLE = 'people',
-  TECH = 'tech'
-}
-
-export enum PlaceImgFilter {
-  GRAYSCALE = 'grayscale',
-  SEPIA = 'sepia'
-}
+type PlaceImgCategory = 'any' | 'animals' | 'architecture' | 'nature' | 'people' | 'tech'
+type PlaceImgFilter = 'grayscale' | 'sepia'
 
 export const imageUrlFromPlaceIMG = (options: { width: number, height: number, category?: PlaceImgCategory, filter?: PlaceImgFilter }) => {
-  const { width, height, category, filter } = { category: PlaceImgCategory.ANY, ...options }
+  const { width, height, category, filter } = { category: 'any', ...options }
   const url = `https://placeimg.com/${width}/${height}/${category}`
   if (filter) url + `/${filter}`
   return url
@@ -231,19 +217,11 @@ export const hex = (count: number = 1) => {
   return `0x${hexString}` // 0x is the prefix used to denote hexadecimal
 }
 
-export enum WordType {
-  VERB = 'verb',
-  PREPOSITION = 'preposition',
-  NOUN = 'noun',
-  INTERJECTION = 'interjection',
-  CONJUNCTION = 'conjunction',
-  ADVERB = 'adverb',
-  ADJECTIVE = 'adjective'
-}
+type WordType = 'verb' | 'preposition' | 'noun' | 'interjection' | 'conjunction' | 'adverb' | 'adjective'
 
 export const word = (options: { locale?: string, type?: WordType, filter?: (word: string) => void } = {}): string => {
   const { type, locale, filter } = options
-  const _type = type || arrayElement(Object.values(WordType))
+  const _type = type || arrayElement(Object.values(['verb', 'preposition', 'noun', 'interjection', 'conjunction', 'adverb', 'adjective']))
   const adjectives = getLocaleData<string[]>({ locale, key: `${_type}s` })
   if (typeof filter === 'function') return arrayElement(adjectives.filter(filter))
   return arrayElement(adjectives)
@@ -266,17 +244,9 @@ export const username = (options: { locale?: string, type?: number, firstName?: 
   }
 }
 
-export enum MacAddressSeparator { NONE = '', DOT = '.', COLON = ':', DASH = '-', SPACE = ' ' }
-
-export enum MacAddressTransmission {
-  UNICAST = 'unicast',
-  MULTICAST = 'multicast'
-}
-
-export enum MacAddressAdministration {
-  LAA = 'laa', // locally administered
-  UAA = 'uaa' // globally unique (oui enforced)
-}
+type MacAddressSeparator = '' | '.' | ':' | '-' | ' '
+type MacAddressTransmission = 'unicast' | 'multicast'
+type MacAddressAdministration = 'laa' | 'uaa' // laa = locally administere | uaa = globally unique (oui enforced)
 
 // TODO: EUI64 address -- https://kwallaceccie.mykajabi.com/blog/how-to-calculate-an-eui-64-address
 export const macAddress = (options: {
@@ -284,7 +254,7 @@ export const macAddress = (options: {
   transmission?: MacAddressTransmission,
   administration?: MacAddressAdministration
 } = {}): string => {
-  const { separator = MacAddressSeparator.COLON, transmission, administration } = options
+  const { separator = '-', transmission, administration } = options
 
   const mac = array(6, (index) => {
     let value = number({ max: 255 })
@@ -292,21 +262,21 @@ export const macAddress = (options: {
     // https://en.wikipedia.org/wiki/MAC_address#Address_details
     // use first octet to set transmission and administration bits
     if (index === 0) {
-      if (transmission === MacAddressTransmission.MULTICAST)
+      if (transmission === 'multicast')
         value |= 1 << 0 // set bit https://stackoverflow.com/questions/1436438/how-do-you-set-clear-and-toggle-a-single-bit-in-javascript
-      else if (transmission === MacAddressTransmission.UNICAST)
+      else if (transmission === 'unicast')
         value &= ~(1 << 0) // unset bit
 
-      if (administration === MacAddressAdministration.LAA)
+      if (administration === 'laa')
         value |= 1 << 1
-      else if (administration === MacAddressAdministration.UAA)
+      else if (administration === 'uaa')
         value &= ~(1 << 1)
     }
 
     return hexPadLeft(value.toString(16))
   })
 
-  if (separator === MacAddressSeparator.DOT) {
+  if (separator === '.') {
     let dotMac = ''
     for (let i = 0; i < mac.length; i++) {
       dotMac += mac[i]
@@ -329,7 +299,7 @@ export const domainName = (options: { locale?: string } = {}): string => {
   const { locale } = options
 
   const name = arrayElement([
-    word({ locale, type: WordType.NOUN }),
+    word({ locale, type: 'noun' }),
     firstName({ locale })
   ])
 
@@ -395,10 +365,7 @@ export const latLong = (): string => {
   return `${latidude()}, ${longitude()}`
 }
 
-export enum DirectionType {
-  CARDINAL = 'cardinal',
-  ORDINAL = 'ordinal'
-}
+type DirectionType = 'cardinal' | 'ordinal'
 
 export const direction = (options: { locale?: string, type?: DirectionType, useAbbr?: boolean } = {}): string => {
   const { locale, type, useAbbr } = options
@@ -418,19 +385,16 @@ export const state = (options: { locale?: string, useAbbr?: boolean } = {}): str
   return arrayElement(states)
 }
 
-export enum CountryCodeType {
-  Alpha2 = 'alpha2',
-  Alpha3 = 'alpha3'
-}
+type CountryCodeType = 'alpha2' | 'alpha3'
 
 export const country = (options: { locale?: string, useCode?: CountryCodeType } = {}): string => {
   const { locale, useCode } = options
 
   const getLocaleDataKey = () => {
     switch (useCode) {
-      case CountryCodeType.Alpha2:
+      case 'alpha2':
         return 'countryCodesAlpha2'
-      case CountryCodeType.Alpha3:
+      case 'alpha3':
         return 'countryCodesAlpha3'
       default:
         return 'countries'
@@ -450,7 +414,7 @@ export const price = (options: { locale?: string, min?: number, max?: number, cu
   return formatter.format(number({ min, max, float: true }))
 }
 
-export { CreditCardProvider }
+type CreditCardProvider = 'solo' | 'visa' | 'mastercard' | 'maestro' | 'laser' | 'jcb' | 'instapayment' | 'discover' | 'dinersClub' | 'americanExpress'
 
 export const creditCardNumber = (options: { provider?: CreditCardProvider } = {}): string => {
   const { provider } = options

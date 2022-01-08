@@ -1,4 +1,4 @@
-import minifaker, { CountryCodeType, DirectionType, Gender, WordType } from '../src'
+import minifaker from '../src'
 import '../src/locales/en'
 import '../src/locales/fr'
 import '../src/locales/fr-CA'
@@ -14,8 +14,8 @@ test('Test locales all', () => {
 
     expect(minifaker.phoneNumber())
     expect(minifaker.firstName())
-    expect(minifaker.firstName({ gender: Gender.FEMALE }))
-    expect(minifaker.firstName({ gender: Gender.MALE }))
+    expect(minifaker.firstName({ gender: 'male' }))
+    expect(minifaker.firstName({ gender: 'female' }))
     expect(minifaker.cityName())
 
     if (locale === 'en') {
@@ -23,10 +23,10 @@ test('Test locales all', () => {
       expect(minifaker.citySuffix())
       expect(minifaker.word())
       expect(minifaker.word({ filter: (word) => word.length > 5 }))
-      expect(minifaker.word({ type: WordType.NOUN }))
+      expect(minifaker.word({ type: 'noun' }))
       expect(minifaker.state({ useAbbr: true }))
-      expect(minifaker.country({ useCode: CountryCodeType.Alpha2 }))
-      expect(minifaker.country({ useCode: CountryCodeType.Alpha3 }))
+      expect(minifaker.country({ useCode: 'alpha2' }))
+      expect(minifaker.country({ useCode: 'alpha3' }))
       expect(minifaker.fileName())
       expect(minifaker.filePath())
     }
@@ -59,7 +59,8 @@ test('Test locales all', () => {
     expect(minifaker.timeZone())
     expect(minifaker.direction())
     expect(minifaker.direction({ useAbbr: true }))
-    expect(minifaker.direction({ type: DirectionType.CARDINAL }))
+    expect(minifaker.direction({ type: 'ordinal' }))
+    expect(minifaker.direction({ type: 'cardinal' }))
     expect(minifaker.state())
     expect(minifaker.country())
     expect(minifaker.price())

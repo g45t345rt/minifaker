@@ -72,19 +72,6 @@ export const visa = [
   "4###-####-####-###L"
 ]
 
-export enum CreditCardProvider {
-  SOLO = 'solo',
-  VISA = 'visa',
-  MASTERCARD = 'mastercard',
-  MAESTRO = 'maestro',
-  LASER = 'laser',
-  JCB = 'jcb',
-  INSTAPAYMENT = 'instapayment',
-  DISCOVER = 'discover',
-  DINERS_CLUB = 'dinersClub',
-  AMERICAN_EXPRESS = 'americanExpress'
-}
-
 export default {
   visa,
   solo,
