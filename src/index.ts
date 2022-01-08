@@ -12,6 +12,9 @@ import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
 import dirPaths from './data/dirPaths'
 import commonMimeTypes from './data/commonMimeTypes'
 
+// https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
+type Locale = (string & {}) | 'en' | 'fr' | 'fr-CA' | 'es' // we need intellisense for locales but also want any type of string for custom locale
+
 const locales = {}
 let defaultLocale = null
 let random = _seedrandom()
@@ -24,7 +27,7 @@ const throwNoLocale = (locale) => {
   throw new Error(`The locale [${locale}] is not imported or supported.`)
 }
 
-const throwNoLocaleData = (locale: string, key: string) => {
+const throwNoLocaleData = (locale: Locale, key: string) => {
   throw new Error(`The locale [${locale}] data of [${key}] doest not exists. Mostly not implemented yet!.`)
 }
 
@@ -32,7 +35,7 @@ const setSeed = (seed: string) => {
   random = _seedrandom(seed)
 }
 
-const getLocaleData = <T>({ locale: _locale, key }: { locale?: string, key: string }): T => {
+const getLocaleData = <T>({ locale: _locale, key }: { locale?: Locale, key: string }): T => {
   if (!defaultLocale) throwNoDefaultLocale()
 
   const locale = _locale || defaultLocale
@@ -48,13 +51,13 @@ export const nonsecure = _nanoid_nonsecure
 export const uuid = _uuid
 export const password = _generatePassword
 
-export const addLocale = (name: string, locale) => {
+export const addLocale = (name: string, localeData) => {
   const noLocales = Object.keys(locales).length === 0
-  locales[name] = locale
+  locales[name] = localeData
   if (noLocales) setDefaultLocale(name)
 }
 
-export const setDefaultLocale = (locale: string) => {
+export const setDefaultLocale = (locale: Locale) => {
   if (!locales[locale]) throwNoLocale(locale)
   defaultLocale = locale
 }
@@ -91,7 +94,7 @@ export const objectElement = (obj: any): { key: string, value: unknown } => {
 
 type Gender = 'male' | 'female'
 
-export const firstName = (options: { locale?: string, gender?: Gender } = {}): string => {
+export const firstName = (options: { locale?: Locale, gender?: Gender } = {}): string => {
   const { locale, gender } = options
   switch (gender) {
     case 'female':
@@ -106,7 +109,7 @@ export const firstName = (options: { locale?: string, gender?: Gender } = {}): s
   }
 }
 
-export const phoneNumber = (options: { locale?: string, formats?: string[] } = {}) => {
+export const phoneNumber = (options: { locale?: Locale, formats?: string[] } = {}) => {
   const { locale, formats } = options
   const phoneFormats = formats || getLocaleData<string[]>({ locale, key: 'phoneFormats' })
   return arrayElement(phoneFormats).split('').map((c) => {
@@ -115,19 +118,19 @@ export const phoneNumber = (options: { locale?: string, formats?: string[] } = {
   }).join('')
 }
 
-export const cityName = (options: { locale?: string } = {}): string => {
+export const cityName = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const cityNames = getLocaleData<string[]>({ locale, key: 'cityNames' })
   return arrayElement(cityNames)
 }
 
-export const cityPrefix = (options: { locale?: string } = {}): string => {
+export const cityPrefix = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const cityPrefixes = getLocaleData<string[]>({ locale, key: 'cityPrefixes' })
   return arrayElement<string>(cityPrefixes)
 }
 
-export const citySuffix = (options: { locale?: string } = {}): string => {
+export const citySuffix = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const citySuffixes = getLocaleData<string[]>({ locale, key: 'citySuffixes' })
   return arrayElement<string>(citySuffixes)
@@ -153,33 +156,33 @@ export const imageUrlFromPlaceholder = (options: { width: number, height?: numbe
   return url
 }
 
-export const lastName = (options: { locale?: string } = {}): string => {
+export const lastName = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const lastNames = getLocaleData<string[]>({ locale, key: 'lastNames' })
   return arrayElement(lastNames)
 }
 
-export const name = (options?: { locale?: string, gender?: Gender }): string => {
+export const name = (options?: { locale?: Locale, gender?: Gender }): string => {
   return `${firstName(options)} ${lastName(options)}`
 }
 
-export const jobTitle = (options?: { locale?: string }): string => {
+export const jobTitle = (options?: { locale?: Locale }): string => {
   return `${jobDescriptor(options)} ${jobArea(options)} ${jobType(options)}`
 }
 
-export const jobType = (options: { locale?: string } = {}): string => {
+export const jobType = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const jobTypes = getLocaleData<string[]>({ locale, key: 'jobTypes' })
   return arrayElement(jobTypes)
 }
 
-export const jobArea = (options: { locale?: string } = {}): string => {
+export const jobArea = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const jobLevels = getLocaleData<string[]>({ locale, key: 'jobLevels' })
   return arrayElement(jobLevels)
 }
 
-export const jobDescriptor = (options: { locale?: string } = {}): string => {
+export const jobDescriptor = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const jobDescriptors = getLocaleData<string[]>({ locale, key: 'jobDescriptors' })
   return arrayElement(jobDescriptors)
@@ -219,7 +222,7 @@ export const hex = (count: number = 1) => {
 
 type WordType = 'verb' | 'preposition' | 'noun' | 'interjection' | 'conjunction' | 'adverb' | 'adjective'
 
-export const word = (options: { locale?: string, type?: WordType, filter?: (word: string) => void } = {}): string => {
+export const word = (options: { locale?: Locale, type?: WordType, filter?: (word: string) => void } = {}): string => {
   const { type, locale, filter } = options
   const _type = type || arrayElement(Object.values(['verb', 'preposition', 'noun', 'interjection', 'conjunction', 'adverb', 'adjective']))
   const adjectives = getLocaleData<string[]>({ locale, key: `${_type}s` })
@@ -227,7 +230,7 @@ export const word = (options: { locale?: string, type?: WordType, filter?: (word
   return arrayElement(adjectives)
 }
 
-export const username = (options: { locale?: string, type?: number, firstName?: string, lastName?: string } = {}): string => {
+export const username = (options: { locale?: Locale, type?: number, firstName?: string, lastName?: string } = {}): string => {
   const { locale, type: _type, firstName: _firstName, lastName: _lastName } = options
 
   const newFirstName = _firstName || firstName({ locale })
@@ -288,14 +291,14 @@ export const macAddress = (options: {
   return mac.join(separator)
 }
 
-export const email = (options: { locale?: string, firstName?: string, lastName?: string, provider?: string } = {}): string => {
+export const email = (options: { locale?: Locale, firstName?: string, lastName?: string, provider?: string } = {}): string => {
   const { locale, provider: _provider } = options
   const freeEmails = getLocaleData<string[]>({ locale, key: 'freeEmails' })
   const provider = _provider || arrayElement(freeEmails)
   return `${username(options)}@${provider}`
 }
 
-export const domainName = (options: { locale?: string } = {}): string => {
+export const domainName = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
 
   const name = arrayElement([
@@ -306,15 +309,15 @@ export const domainName = (options: { locale?: string } = {}): string => {
   return `${name.toLowerCase()}.${domainSuffix({ locale })}`
 }
 
-export const domainSuffix = (options: { locale?: string } = {}): string => {
+export const domainSuffix = (options: { locale?: Locale } = {}): string => {
   const { locale } = options
   const domainSuffixes = getLocaleData<string[]>({ locale, key: 'domainSuffixes' })
   return arrayElement(domainSuffixes)
 }
 
-export const domainUrl = (options: { locale?: string } = {}): string => `https://${domainName(options)}`
+export const domainUrl = (options: { locale?: Locale } = {}): string => `https://${domainName(options)}`
 
-export const zipCode = (options: { locale?: string, format?: string } = {}): string => {
+export const zipCode = (options: { locale?: Locale, format?: string } = {}): string => {
   const { locale, format: _format } = options
 
   let format = _format
@@ -326,28 +329,28 @@ export const zipCode = (options: { locale?: string, format?: string } = {}): str
   return replaceSymbols(format)
 }
 
-export const streetSuffix = (options: { locale?: string } = {}) => {
+export const streetSuffix = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const streetSuffixes = getLocaleData<string[]>({ locale, key: 'streetSuffixes' })
   return arrayElement(streetSuffixes)
 }
 
-export const streetPrefix = (options: { locale?: string } = {}) => {
+export const streetPrefix = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const streetSuffixes = getLocaleData<string[]>({ locale, key: 'streetPrefixes' })
   return arrayElement(streetSuffixes)
 }
 
-export const streetName = (options: { locale?: string } = {}) => {
+export const streetName = (options: { locale?: Locale } = {}) => {
   return `${arrayElement([firstName(options), lastName(options)])} ${streetSuffix(options)}`
 }
 
-export const streetAddress = (options: { locale?: string } = {}) => {
+export const streetAddress = (options: { locale?: Locale } = {}) => {
   const streetNumber = array(number({ min: 3, max: 5 }), () => number({ max: 9 })).join('')
   return `${streetNumber} ${streetName(options)}`
 }
 
-export const timeZone = (options: { locale?: string } = {}) => {
+export const timeZone = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const timeZones = getLocaleData<string[]>({ locale, key: 'timeZones' })
   return arrayElement(timeZones)
@@ -367,7 +370,7 @@ export const latLong = (): string => {
 
 type DirectionType = 'cardinal' | 'ordinal'
 
-export const direction = (options: { locale?: string, type?: DirectionType, useAbbr?: boolean } = {}): string => {
+export const direction = (options: { locale?: Locale, type?: DirectionType, useAbbr?: boolean } = {}): string => {
   const { locale, type, useAbbr } = options
 
   const directions = getLocaleData<{ cardinal: string[][], ordinal: string[][] }>({ locale, key: 'directions' })
@@ -378,7 +381,7 @@ export const direction = (options: { locale?: string, type?: DirectionType, useA
   return arrayElement(allDirections.map(mapValue))
 }
 
-export const state = (options: { locale?: string, useAbbr?: boolean } = {}): string => {
+export const state = (options: { locale?: Locale, useAbbr?: boolean } = {}): string => {
   const { locale, useAbbr } = options
 
   const states = useAbbr ? getLocaleData<string[]>({ locale, key: 'stateAbbrs' }) : getLocaleData<string[]>({ locale, key: 'states' })
@@ -387,7 +390,7 @@ export const state = (options: { locale?: string, useAbbr?: boolean } = {}): str
 
 type CountryCodeType = 'alpha2' | 'alpha3'
 
-export const country = (options: { locale?: string, useCode?: CountryCodeType } = {}): string => {
+export const country = (options: { locale?: Locale, useCode?: CountryCodeType } = {}): string => {
   const { locale, useCode } = options
 
   const getLocaleDataKey = () => {
@@ -405,7 +408,7 @@ export const country = (options: { locale?: string, useCode?: CountryCodeType } 
   return arrayElement(countries)
 }
 
-export const price = (options: { locale?: string, min?: number, max?: number, currency?: string } = {}): string => {
+export const price = (options: { locale?: Locale, min?: number, max?: number, currency?: string } = {}): string => {
   const { locale: _locale, min, max, currency: _currency } = { min: 0, max: 1000, ...options }
   // don't use getLocaleData since Intl.NumberFormat already support all locales
   const locale = _locale || defaultLocale
@@ -439,14 +442,14 @@ export const semver = () => {
   return [number({ max: 9 }), number({ max: 20 }), number({ max: 99 })].join('.')
 }
 
-export const month = (options: { locale?: string, useAbbr?: boolean } = {}) => {
+export const month = (options: { locale?: Locale, useAbbr?: boolean } = {}) => {
   const { locale, useAbbr } = options
   const months = getLocaleData<{ wide: string[], abbr: string[] }>({ locale, key: 'months' })
   const { wide, abbr } = months
   return arrayElement(useAbbr ? abbr : wide)
 }
 
-export const weekday = (options: { locale?: string, useAbbr?: boolean } = {}) => {
+export const weekday = (options: { locale?: Locale, useAbbr?: boolean } = {}) => {
   const { locale, useAbbr } = options
   const weekdays = getLocaleData<{ wide: string[], abbr: string[] }>({ locale, key: 'weekdays' })
   const { wide, abbr } = weekdays
