@@ -3,7 +3,7 @@ import _seedrandom from 'seedrandom' // seedrandom().quick() is 1.8x faster than
 import * as _nanoid from 'nanoid'
 import * as _nanoid_nonsecure from 'nanoid/non-secure'
 import * as _uuid from 'uuid'
-import _generatePassword from 'generate-password'
+import * as _generatePassword from 'generate-password'
 
 // Helpers and data
 import creditCardProviders, { CreditCardProvider } from './data/creditCardProviders'
