@@ -1,5 +1,5 @@
-import minifaker from '../dist/index'
-import '../dist/locales/en'
+import minifaker from '../dist/cjs/index'
+import '../dist/cjs/locales/en'
 
 test('Test dist file', () => {
   expect(minifaker.boolean())

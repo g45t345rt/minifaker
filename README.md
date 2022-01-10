@@ -1,7 +1,7 @@
 # minifaker
 
 Generate fake data.  
-An alternative to faker.js but with cjs or esm syntax
+An alternative to faker.js with both esm and cjs syntax
 <https://github.com/Marak/faker.js>
 
 ## NPM
@@ -55,8 +55,8 @@ arrayElement(['one', 'two', 'three'])
 ```ts
 import minifaker, { cityName } from 'minifaker'
 // There is no default locale import (not even `english`)
-import 'minifaker/dist/locales/en' // the first locale import is set as default
-import 'minifaker/dist/locales/fr'
+import 'minifaker/locales/en' // the first locale import is set as default
+import 'minifaker/locales/fr'
 
 minifaker.firstName({ gender: 'female' }) // female name in english
 cityName({ locale: 'fr' }) // french city name
@@ -66,7 +66,7 @@ cityName({ locale: 'fr' }) // french city name
 
 ```ts
 import { array, name } from 'minifaker'
-import 'minifaker/dist/locales/en'
+import 'minifaker/locales/en'
 
 array(50, () => name())
 ```
@@ -75,7 +75,7 @@ array(50, () => name())
 
 ```ts
 import { word } from 'minifaker'
-import 'minifaker/dist/locales/en'
+import 'minifaker/locales/en'
 
 word() // Can be an adjective, adverb, conjunction, interjection, noun, preposition, verb
 word({ filter: (word) => word.length > 5 }) // Word with at least 5 characters

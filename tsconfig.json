@@ -9,7 +9,8 @@
       "DOM"
     ],
     "types": [
-      "jest"
+      "jest",
+      "node"
     ]
   },
   "include": [

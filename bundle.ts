@@ -20,17 +20,12 @@ const config = {
   ]
 } as esbuild.BuildOptions
 
-const formats = {
-  'esm': '.mjs',
-  'cjs': '.js'
-} as { [key in esbuild.Format]: string }
+const formats = ['cjs', 'esm'] as esbuild.Format[]
 
-Object.keys(formats).forEach(key => {
-  const extension = formats[key]
+formats.forEach(format => {
   esbuild.build({
     ...config,
-    format: key as esbuild.Format,
-    outExtension: { '.js': extension },
-    outdir: `./dist`
+    format,
+    outdir: `./dist/${format}`
   })
 })
