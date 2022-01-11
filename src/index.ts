@@ -94,7 +94,7 @@ export const objectElement = (obj: any): { key: string, value: unknown } => {
 
 type Gender = 'male' | 'female'
 
-export const firstName = (options: { locale?: Locale, gender?: Gender } = {}): string => {
+export const firstName = (options: { locale?: Locale, gender?: Gender } = {}) => {
   const { locale, gender } = options
   switch (gender) {
     case 'female':
@@ -118,19 +118,19 @@ export const phoneNumber = (options: { locale?: Locale, formats?: string[] } = {
   }).join('')
 }
 
-export const cityName = (options: { locale?: Locale } = {}): string => {
+export const cityName = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const cityNames = getLocaleData<string[]>({ locale, key: 'cityNames' })
   return arrayElement(cityNames)
 }
 
-export const cityPrefix = (options: { locale?: Locale } = {}): string => {
+export const cityPrefix = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const cityPrefixes = getLocaleData<string[]>({ locale, key: 'cityPrefixes' })
   return arrayElement<string>(cityPrefixes)
 }
 
-export const citySuffix = (options: { locale?: Locale } = {}): string => {
+export const citySuffix = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const citySuffixes = getLocaleData<string[]>({ locale, key: 'citySuffixes' })
   return arrayElement<string>(citySuffixes)
@@ -156,39 +156,39 @@ export const imageUrlFromPlaceholder = (options: { width: number, height?: numbe
   return url
 }
 
-export const lastName = (options: { locale?: Locale } = {}): string => {
+export const lastName = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const lastNames = getLocaleData<string[]>({ locale, key: 'lastNames' })
   return arrayElement(lastNames)
 }
 
-export const name = (options?: { locale?: Locale, gender?: Gender }): string => {
+export const name = (options?: { locale?: Locale, gender?: Gender }) => {
   return `${firstName(options)} ${lastName(options)}`
 }
 
-export const jobTitle = (options?: { locale?: Locale }): string => {
+export const jobTitle = (options?: { locale?: Locale }) => {
   return `${jobDescriptor(options)} ${jobArea(options)} ${jobType(options)}`
 }
 
-export const jobType = (options: { locale?: Locale } = {}): string => {
+export const jobType = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const jobTypes = getLocaleData<string[]>({ locale, key: 'jobTypes' })
   return arrayElement(jobTypes)
 }
 
-export const jobArea = (options: { locale?: Locale } = {}): string => {
+export const jobArea = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const jobLevels = getLocaleData<string[]>({ locale, key: 'jobLevels' })
   return arrayElement(jobLevels)
 }
 
-export const jobDescriptor = (options: { locale?: Locale } = {}): string => {
+export const jobDescriptor = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const jobDescriptors = getLocaleData<string[]>({ locale, key: 'jobDescriptors' })
   return arrayElement(jobDescriptors)
 }
 
-export const ip = (): string => {
+export const ip = () => {
   return array(4, () => number({ max: 255 })).join('.')
 }
 
@@ -196,7 +196,7 @@ export const port = (): number => {
   return number({ max: 65535 })
 }
 
-export const ipv6 = (): string => {
+export const ipv6 = () => {
   return array(8, () => number({ max: 65535 }).toString(16)).join(':')
 }
 
@@ -205,7 +205,7 @@ const hexPadLeft = (value: string) => {
   return value
 }
 
-export const color = (options: { r?: number, g?: number, b?: number } = {}): string => {
+export const color = (options: { r?: number, g?: number, b?: number } = {}) => {
   const { r, g, b } = options
 
   const red = (r || number({ max: 256 })).toString(16)
@@ -222,7 +222,7 @@ export const hex = (count: number = 1) => {
 
 type WordType = 'verb' | 'preposition' | 'noun' | 'interjection' | 'conjunction' | 'adverb' | 'adjective'
 
-export const word = (options: { locale?: Locale, type?: WordType, filter?: (word: string) => void } = {}): string => {
+export const word = (options: { locale?: Locale, type?: WordType, filter?: (word: string) => void } = {}) => {
   const { type, locale, filter } = options
   const _type = type || arrayElement(Object.values(['verb', 'preposition', 'noun', 'interjection', 'conjunction', 'adverb', 'adjective']))
   const adjectives = getLocaleData<string[]>({ locale, key: `${_type}s` })
@@ -230,7 +230,7 @@ export const word = (options: { locale?: Locale, type?: WordType, filter?: (word
   return arrayElement(adjectives)
 }
 
-export const username = (options: { locale?: Locale, type?: number, firstName?: string, lastName?: string } = {}): string => {
+export const username = (options: { locale?: Locale, type?: number, firstName?: string, lastName?: string } = {}) => {
   const { locale, type: _type, firstName: _firstName, lastName: _lastName } = options
 
   const newFirstName = _firstName || firstName({ locale })
@@ -256,7 +256,7 @@ export const macAddress = (options: {
   separator?: MacAddressSeparator,
   transmission?: MacAddressTransmission,
   administration?: MacAddressAdministration
-} = {}): string => {
+} = {}) => {
   const { separator = '-', transmission, administration } = options
 
   const mac = array(6, (index) => {
@@ -291,14 +291,14 @@ export const macAddress = (options: {
   return mac.join(separator)
 }
 
-export const email = (options: { locale?: Locale, firstName?: string, lastName?: string, provider?: string } = {}): string => {
+export const email = (options: { locale?: Locale, firstName?: string, lastName?: string, provider?: string } = {}) => {
   const { locale, provider: _provider } = options
   const freeEmails = getLocaleData<string[]>({ locale, key: 'freeEmails' })
   const provider = _provider || arrayElement(freeEmails)
   return `${username(options)}@${provider}`
 }
 
-export const domainName = (options: { locale?: Locale } = {}): string => {
+export const domainName = (options: { locale?: Locale } = {}) => {
   const { locale } = options
 
   const name = arrayElement([
@@ -309,15 +309,15 @@ export const domainName = (options: { locale?: Locale } = {}): string => {
   return `${name.toLowerCase()}.${domainSuffix({ locale })}`
 }
 
-export const domainSuffix = (options: { locale?: Locale } = {}): string => {
+export const domainSuffix = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const domainSuffixes = getLocaleData<string[]>({ locale, key: 'domainSuffixes' })
   return arrayElement(domainSuffixes)
 }
 
-export const domainUrl = (options: { locale?: Locale } = {}): string => `https://${domainName(options)}`
+export const domainUrl = (options: { locale?: Locale } = {}) => `https://${domainName(options)}`
 
-export const zipCode = (options: { locale?: Locale, format?: string } = {}): string => {
+export const zipCode = (options: { locale?: Locale, format?: string } = {}) => {
   const { locale, format: _format } = options
 
   let format = _format
@@ -356,21 +356,21 @@ export const timeZone = (options: { locale?: Locale } = {}) => {
   return arrayElement(timeZones)
 }
 
-export const latidude = (): string => {
+export const latidude = () => {
   return number({ min: -90, max: 90, float: true }).toFixed(6)
 }
 
-export const longitude = (): string => {
+export const longitude = () => {
   return number({ min: -180, max: 180, float: true }).toFixed(6)
 }
 
-export const latLong = (): string => {
+export const latLong = () => {
   return `${latidude()}, ${longitude()}`
 }
 
 type DirectionType = 'cardinal' | 'ordinal'
 
-export const direction = (options: { locale?: Locale, type?: DirectionType, useAbbr?: boolean } = {}): string => {
+export const direction = (options: { locale?: Locale, type?: DirectionType, useAbbr?: boolean } = {}) => {
   const { locale, type, useAbbr } = options
 
   const directions = getLocaleData<{ cardinal: string[][], ordinal: string[][] }>({ locale, key: 'directions' })
@@ -381,7 +381,7 @@ export const direction = (options: { locale?: Locale, type?: DirectionType, useA
   return arrayElement(allDirections.map(mapValue))
 }
 
-export const state = (options: { locale?: Locale, useAbbr?: boolean } = {}): string => {
+export const state = (options: { locale?: Locale, useAbbr?: boolean } = {}) => {
   const { locale, useAbbr } = options
 
   const states = useAbbr ? getLocaleData<string[]>({ locale, key: 'stateAbbrs' }) : getLocaleData<string[]>({ locale, key: 'states' })
@@ -390,7 +390,7 @@ export const state = (options: { locale?: Locale, useAbbr?: boolean } = {}): str
 
 type CountryCodeType = 'alpha2' | 'alpha3'
 
-export const country = (options: { locale?: Locale, useCode?: CountryCodeType } = {}): string => {
+export const country = (options: { locale?: Locale, useCode?: CountryCodeType } = {}) => {
   const { locale, useCode } = options
 
   const getLocaleDataKey = () => {
@@ -408,7 +408,7 @@ export const country = (options: { locale?: Locale, useCode?: CountryCodeType } 
   return arrayElement(countries)
 }
 
-export const price = (options: { locale?: Locale, min?: number, max?: number, currency?: string } = {}): string => {
+export const price = (options: { locale?: Locale, min?: number, max?: number, currency?: string } = {}) => {
   const { locale: _locale, min, max, currency: _currency } = { min: 0, max: 1000, ...options }
   // don't use getLocaleData since Intl.NumberFormat already support all locales
   const locale = _locale || defaultLocale
@@ -419,7 +419,7 @@ export const price = (options: { locale?: Locale, min?: number, max?: number, cu
 
 type CreditCardProvider = 'solo' | 'visa' | 'mastercard' | 'maestro' | 'laser' | 'jcb' | 'instapayment' | 'discover' | 'dinersClub' | 'americanExpress'
 
-export const creditCardNumber = (options: { provider?: CreditCardProvider } = {}): string => {
+export const creditCardNumber = (options: { provider?: CreditCardProvider } = {}) => {
   const { provider } = options
   const providerFormats = provider ? creditCardProviders[provider] : Object.values(creditCardProviders).flat()
   let cardNumberFormat = arrayElement<string>(providerFormats)
@@ -434,7 +434,7 @@ export const creditCardNumber = (options: { provider?: CreditCardProvider } = {}
   return cardNumberFormat
 }
 
-export const creditCardCVV = (): string => {
+export const creditCardCVV = () => {
   return array(3, () => number({ max: 9 })).join('')
 }
 
@@ -466,7 +466,7 @@ export const date = (options: { from?: Date, to?: Date } = {}) => {
   return new Date(number({ min: fromEpoch, max: toEpoch }))
 }
 
-export const bitcoinAddress = (): string => {
+export const bitcoinAddress = () => {
   const prefix = arrayElement(['1', '3', 'bc1'])
   const count = number({ min: 27, max: 34 })
   const characters = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ' // without 0, O, I, and l.
@@ -474,7 +474,7 @@ export const bitcoinAddress = (): string => {
 }
 
 // Using commonMimeTypes because it's smaller and we don't need all of them to generate fake data - The full is still in the package but not exported => ./data/mimeType
-export const mimeType = (): string => {
+export const mimeType = () => {
   return arrayElement(Object.values(commonMimeTypes))
 }
 
@@ -482,16 +482,16 @@ export const fileExt = () => {
   return arrayElement(Object.keys(commonMimeTypes))
 }
 
-export const dirPath = (): string => {
+export const dirPath = () => {
   return arrayElement(dirPaths)
 }
 
-export const fileName = (): string => {
+export const fileName = () => {
   const words = array(number({ max: 3 }), () => word())
   return `${words.join('_').toLocaleLowerCase()}${fileExt()}`
 }
 
-export const filePath = (): string => {
+export const filePath = () => {
   return `${dirPath()}/${fileName()}`
 }
 
