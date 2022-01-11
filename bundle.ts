@@ -14,8 +14,7 @@ const config = {
     '*/../index', // for accessing minifaker in locales folder
     // keep them as external since they might already be installed... I can't really bundle them because I don't have the TS file generated :S
     'nanoid',
-    'uuid',
-    'generate-password'
+    'uuid'
     //'seedrandom' // bundle seedrandom inside instead since we only we it internally
   ]
 } as esbuild.BuildOptions

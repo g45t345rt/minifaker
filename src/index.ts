@@ -3,7 +3,6 @@ import _seedrandom from 'seedrandom' // seedrandom().quick() is 1.8x faster than
 import * as _nanoid from 'nanoid'
 import * as _nanoid_nonsecure from 'nanoid/non-secure'
 import * as _uuid from 'uuid'
-import * as _generatePassword from 'generate-password'
 
 // Helpers and data
 import creditCardProviders from './data/creditCardProviders'
@@ -11,6 +10,7 @@ import checkLuhn from './helpers/checkLuhn'
 import { replaceRangeSymbols, replaceSymbols } from './helpers/replaceStrings'
 import dirPaths from './data/dirPaths'
 import commonMimeTypes from './data/commonMimeTypes'
+import chars from './data/chars'
 
 // https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
 type Locale = (string & {}) | 'en' | 'fr' | 'fr-CA' | 'es' // we need intellisense for locales but also want any type of string for custom locale
@@ -49,7 +49,6 @@ const getLocaleData = <T>({ locale: _locale, key }: { locale?: Locale, key: stri
 export const nanoId = _nanoid
 export const nonsecure = _nanoid_nonsecure
 export const uuid = _uuid
-export const password = _generatePassword
 
 export const addLocale = (name: string, localeData) => {
   const noLocales = Object.keys(locales).length === 0
@@ -77,7 +76,7 @@ export const arrayElement = <T>(array: T[]): T => {
   return array[number({ max: array.length - 1 })]
 }
 
-export const array = <T>(count: number, cb: (index: number) => void): T[] => {
+export const array = <T>(count: number, cb: (index: number) => T): T[] => {
   let newArray = []
   for (let i = 0; i < count; i++) {
     newArray = [...newArray, cb(i)]
@@ -495,6 +494,99 @@ export const filePath = () => {
   return `${dirPath()}/${fileName()}`
 }
 
+interface PasswordOptions {
+  maxLength?: number
+  minLength?: number
+  uppercases?: boolean
+  lowercases?: boolean
+  numbers?: boolean | number
+  symbols?: boolean | number | string
+  exclude?: (string & {}) | 'similar'
+}
+
+export const password = (options: PasswordOptions = {}) => {
+  const { minLength, maxLength, numbers, symbols, uppercases, lowercases } = options
+
+  let passUpercases = true
+  if (typeof uppercases === 'boolean') passUpercases = uppercases
+
+  let passLowercases = true
+  if (typeof lowercases === 'boolean') passLowercases = lowercases
+
+  if (!passUpercases && !passLowercases) throw new Error(`[uppercases] and [lowercases] can't both be false.`)
+
+  const passMinLength = minLength || 6
+  const passMaxLength = maxLength || 10
+
+  const alphabetList = chars.alphabet.split('')
+  const numberList = chars.base10.split('')
+  let symbolList = chars.passwordSymbols.split('')
+
+  if (passMinLength < 5) throw new Error(`[minLength] must be > 5.`)
+  if (passMinLength > passMaxLength) throw new Error(`[minLength] must be <= to [maxLength].`)
+  if (passMaxLength < passMinLength) throw new Error(`[maxLength] must be >= to [minLength].`)
+
+  const passLength = number({ min: passMinLength, max: passMaxLength })
+
+  let passNumbers = (typeof numbers === 'boolean' && !numbers) ? 0 : number({ min: 1, max: Math.floor(passMinLength / 2) }) // default to half & half of numbers & characters
+  if (typeof numbers === 'number') {
+    if (numbers > passMinLength) throw new Error(`[numbers] must be <= to [minLength].`)
+    passNumbers = numbers
+  }
+
+  let passSymbols = (typeof symbols === 'boolean' && !symbols) ? 0 : 1 // default of one symbol
+
+  if (typeof symbols === 'string') {
+    symbolList = symbols.split('')
+    passSymbols = symbolList.length
+  }
+
+  if (typeof symbols === 'number') {
+    passSymbols = symbols
+  }
+
+  if (passSymbols + passNumbers > passMinLength) throw new Error(`The sum of [symbols(${passSymbols})] and [numbers(${passNumbers})] must be <= to [minLength(${passMinLength})].`)
+  if (passSymbols > passMinLength) throw new Error(`[symbols] must be <= to [minLength]`)
+
+  let types = ['letter', 'number', 'symbol']
+  let _passSymbols = 0, _passNumbers = 0
+
+  return array(passLength, () => {
+    if (_passNumbers === passNumbers) {
+      _passNumbers++ // increment to hit this once
+      types.splice(types.indexOf('number'), 1)
+    }
+
+    if (_passSymbols === passSymbols) {
+      _passSymbols++
+      types.splice(types.indexOf('symbol'), 1)
+    }
+
+    const charType = types.length === 1 ? types[0] : arrayElement(types)
+    if (charType === 'number') {
+      _passNumbers++
+      return arrayElement(numberList)
+    }
+
+    if (charType === 'symbol') {
+      _passSymbols++
+      return arrayElement(symbolList)
+    }
+
+    const letter = arrayElement(alphabetList)
+    if (passUpercases && passLowercases) {
+      const toUpper = boolean()
+      return toUpper ? letter.toUpperCase() : letter
+    } else if (passUpercases && !passLowercases) {
+      return letter.toUpperCase()
+    } else {
+      return letter
+    }
+  }).join('')
+}
+
+password({ numbers: 4, symbols: 2 })
+
 export default {
   setDefaultLocale,
   addLocale,
@@ -554,8 +646,8 @@ export default {
   fileName,
   setSeed,
   hex,
+  password,
   nanoId,
   uuid,
-  password,
   nonsecure
 }

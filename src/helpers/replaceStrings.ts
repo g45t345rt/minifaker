@@ -1,7 +1,8 @@
 import { number, boolean, arrayElement, array } from '../index'
+import chars from '../data/chars'
 
 export const replaceSymbols = (value: string): string => {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  const alphabet = chars.alphabet.toUpperCase().split('')
   return value.split('').map((c) => {
     if (c === '#') return number({ max: 9 }).toString()
     if (c === '?') return arrayElement(alphabet)

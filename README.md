@@ -34,7 +34,7 @@ I'll try fix the duplicates when importing locale files to reduce size as much a
 
 ### Replacing old functions with new powerful packages instead
 
-- nanoid, uuid, generate-password
+- nanoid, uuid
 
 ## Example / usage
 
@@ -89,12 +89,11 @@ word({ type: 'noun' }) // A noun
 ### Direct access to more performant/popular packages
 
 ```ts
-import { nanoId, uuid, password, nonsecure } from 'minifaker'
+import { nanoId, uuid, nonsecure } from 'minifaker'
 
 nanoId.nanoid() // nanoid - https://github.com/ai/nanoid
 nonsecure.nanoid() // nanoid/non-secure - https://github.com/ai/nanoid/blob/main/non-secure/index.js
 uuid.v4() // uuid - https://github.com/uuidjs/uuid
-password.generate() // generate-password - https://github.com/brendanashworth/generate-password
 ```
 
 ## Function mapping
@@ -149,7 +148,7 @@ commerce.price|all|price with `Intl.NumberFormat`
 finance.creditCardNumber|n/a|creditCardNumber
 finance.creditCardCVV|n/a|creditCardCVV
 system.semver|n/a|semver
-internet.password|n/a|password -> `generate-password` funcs
+internet.password|n/a|password
 date.month|en,fr|month
 date.weekday|en,fr|weekday
 date|all|date

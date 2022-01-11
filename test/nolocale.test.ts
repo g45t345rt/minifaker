@@ -59,5 +59,13 @@ test('Test function without locale', () => {
   // Other packages
   expect(minifaker.nanoId.nanoid())
   expect(minifaker.uuid.v4())
-  expect(minifaker.password.generate())
+
+  // Password
+  expect(minifaker.password())
+  expect(minifaker.password({ maxLength: 12, numbers: false, symbols: false }))
+  expect(minifaker.password({ minLength: 7, maxLength: 15, numbers: 5, symbols: 2 }))
+  expect(minifaker.password({ uppercases: false }))
+  expect(minifaker.password({ minLength: 8, maxLength: 8 }))
+  expect(minifaker.password({ minLength: 10, symbols: false, uppercases: false }))
+  expect(minifaker.password({ lowercases: false, symbols: false }))
 })
