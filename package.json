@@ -1,6 +1,6 @@
 {
   "name": "minifaker",
-  "version": "1.33.0",
+  "version": "1.33.1",
   "description": "lightweight faker.js",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
@@ -50,13 +50,13 @@
     "esbuild": "^0.14.11",
     "jest": "^27.4.7",
     "jest-extended": "^1.2.0",
+    "minifaker": "file:.yalc/minifaker",
     "seedrandom": "^3.0.5",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0"
   },
   "dependencies": {
     "@types/uuid": "^8.3.4",
-    "minifaker": "file:.yalc/minifaker",
     "nanoid": "^3.1.31",
     "uuid": "^8.3.2"
   }
