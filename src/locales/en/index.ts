@@ -4,6 +4,7 @@ import firstNames from './name/firstNames'
 import maleFirstNames from './name/maleFirstNames'
 import femaleFirstNames from './name/femaleFirstNames'
 import phoneFormats from './phone/formats'
+import county from './address/county'
 import cityNames from './address/cityNames'
 import cityPrefixes from './address/cityPrefixes'
 import citySuffixes from './address/citySuffixes'
@@ -39,6 +40,7 @@ const locale = {
   femaleFirstNames,
   firstNames,
   phoneFormats,
+  county,
   cityNames,
   cityPrefixes,
   citySuffixes,

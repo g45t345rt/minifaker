@@ -117,6 +117,12 @@ export const phoneNumber = (options: { locale?: Locale, formats?: string[] } = {
   }).join('')
 }
 
+export const county = (options: { locale?: Locale } = {}) => {
+  const { locale } = options
+  const county = getLocaleData<string[]>({ locale, key: 'county' })
+  return arrayElement(county)
+}
+
 export const cityName = (options: { locale?: Locale } = {}) => {
   const { locale } = options
   const cityNames = getLocaleData<string[]>({ locale, key: 'cityNames' })
@@ -355,7 +361,7 @@ export const timeZone = (options: { locale?: Locale } = {}) => {
   return arrayElement(timeZones)
 }
 
-export const latidude = () => {
+export const latitude = () => {
   return number({ min: -90, max: 90, float: true }).toFixed(6)
 }
 
@@ -364,7 +370,7 @@ export const longitude = () => {
 }
 
 export const latLong = () => {
-  return `${latidude()}, ${longitude()}`
+  return `${latitude()}, ${longitude()}`
 }
 
 type DirectionType = 'cardinal' | 'ordinal'
@@ -625,7 +631,7 @@ export default {
   streetName,
   streetAddress,
   timeZone,
-  latidude,
+  latitude,
   longitude,
   latLong,
   direction,

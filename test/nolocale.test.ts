@@ -28,7 +28,7 @@ test('Test function without locale', () => {
   expect(minifaker.macAddress({ transmission: 'multicast', administration: 'laa' }))
   expect(minifaker.macAddress({ transmission: 'unicast', administration: 'uaa' }))
   expect(minifaker.zipCode({ format: '*#A ?#*' }))
-  expect(minifaker.latidude())
+  expect(minifaker.latitude())
   expect(minifaker.longitude())
   expect(minifaker.latLong())
   expect(minifaker.creditCardNumber())
