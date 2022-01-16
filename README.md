@@ -138,7 +138,7 @@ address.streetSuffix|en,fr|streetSuffix
 address.streetName|en,fr|streetName
 address.streetAddress|en,fr|streetAddress
 address.timeZone|en|timeZone
-address.latidude|n/a|latidude
+address.latitude|n/a|latitude
 address.longitude|n/a|longitude
 n/a|n/a|latLong
 address.direction,address.cardinalDirection,address.ordinalDirection|en,fr|direction

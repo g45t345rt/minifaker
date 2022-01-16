@@ -25,6 +25,7 @@ test('Test locales all', () => {
       expect(minifaker.word({ filter: (word) => word.length > 5 }))
       expect(minifaker.word({ type: 'noun' }))
       expect(minifaker.state({ useAbbr: true }))
+      expect(minifaker.county())
       expect(minifaker.country({ useCode: 'alpha2' }))
       expect(minifaker.country({ useCode: 'alpha3' }))
       expect(minifaker.fileName())
