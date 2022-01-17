@@ -6,8 +6,8 @@ import phoneFormats from './phone/formats'
 import domainSuffixes from './internet/domainSuffixes'
 import freeEmails from './internet/freeEmails'
 import postCodeFormats from './address/postCodeFormats'
-import states from './address/states'
-import stateAbbrs from './address/stateAbbrs'
+import provinces from './address/provinces'
+import provinceAbbrs from './address/provinceAbbrs'
 
 const defaultCurrency = 'CAD'
 const defaultCountry = 'Canada'
@@ -19,8 +19,8 @@ const locale = {
   domainSuffixes,
   freeEmails,
   postCodeFormats,
-  stateAbbrs,
-  states,
+  provinceAbbrs,
+  provinces,
   defaultCurrency,
   defaultCountry
 }

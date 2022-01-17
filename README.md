@@ -123,7 +123,7 @@ name.jobType|en,fr|jobType
 n/a|en,fr|name
 internet.ip|n/a|ip
 internet.port|n/a|port
-adjective,adverb,conjunction,  interjection,noun,preposition,verb|en|word
+adjective,adverb,conjunction,interjection,noun,preposition,verb|en|word
 internet.ipv6|n/a|ipv6
 internet.color|n/a|color
 internet.username|en,fr|username
@@ -142,7 +142,7 @@ address.latitude|n/a|latitude
 address.longitude|n/a|longitude
 n/a|n/a|latLong
 address.direction,address.cardinalDirection,address.ordinalDirection|en,fr|direction
-address.state,address.stateAbbr|en,fr,fr-CA|state
+address.state,address.stateAbbr|en,es|state
 address.country,address.countryCode|en,fr|country
 commerce.price|all|price with `Intl.NumberFormat`
 finance.creditCardNumber|n/a|creditCardNumber
@@ -160,3 +160,5 @@ system.mimeType,commonMimeType|n/a|mimeType
 system.dirPath|n/a|dirPath
 seed|n/a|setSeed
 hexaDecimal|n/a|hex
+address.county|en|county
+address.province|fr,es,fr-CA|province

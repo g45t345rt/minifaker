@@ -4,7 +4,7 @@ import firstNames from './name/firstNames'
 import maleFirstNames from './name/maleFirstNames'
 import femaleFirstNames from './name/femaleFirstNames'
 import phoneFormats from './phone/formats'
-import county from './address/county'
+import counties from './address/counties'
 import cityNames from './address/cityNames'
 import cityPrefixes from './address/cityPrefixes'
 import citySuffixes from './address/citySuffixes'
@@ -31,16 +31,16 @@ import countryCodesAlpha3 from './address/countryCodesAlpha3'
 import months from './date/months'
 import weekdays from './date/weekdays'
 
-const defaultCurrency = 'USD'
-const defaultCountry = 'United State of America'
-const title = 'English'
+const defaultCurrency = 'GPB'
+const defaultCountry = 'England'
+const title = 'English (British)'
 
 const locale = {
   maleFirstNames,
   femaleFirstNames,
   firstNames,
   phoneFormats,
-  county,
+  counties,
   cityNames,
   cityPrefixes,
   citySuffixes,

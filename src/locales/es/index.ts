@@ -13,12 +13,14 @@ import postCodeFormats from './address/postCodeFormats'
 import streetPrefixes from './address/streetPrefixes'
 import streetSuffixes from './address/streetSuffixes'
 import directions from './address/directions'
-import states from './address/states'
+import provinces from './address/provinces'
 import countries from './address/countries'
 import months from './date/months'
 import weekdays from './date/weekdays'
 import timeZones from './address/timeZones'
 import nouns from './word/nouns'
+import states from './address/states'
+import stateAbbrs from '../en/address/stateAbbrs'
 
 const defaultCurrency = 'EUR'
 const defaultCountry = 'España'
@@ -38,14 +40,16 @@ const locale = {
   streetPrefixes,
   streetSuffixes,
   directions,
-  states,
+  provinces,
   countries,
   defaultCurrency,
   months,
   weekdays,
   defaultCountry,
   timeZones,
-  nouns
+  nouns,
+  states,
+  stateAbbrs
 }
 
 minifaker.addLocale('es', locale)

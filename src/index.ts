@@ -119,8 +119,14 @@ export const phoneNumber = (options: { locale?: Locale, formats?: string[] } = {
 
 export const county = (options: { locale?: Locale } = {}) => {
   const { locale } = options
-  const county = getLocaleData<string[]>({ locale, key: 'county' })
-  return arrayElement(county)
+  const counties = getLocaleData<string[]>({ locale, key: 'counties' })
+  return arrayElement(counties)
+}
+
+export const province = (options: { locale?: Locale } = {}) => {
+  const { locale } = options
+  const provinces = getLocaleData<string[]>({ locale, key: 'provinces' })
+  return arrayElement(provinces)
 }
 
 export const cityName = (options: { locale?: Locale } = {}) => {
@@ -591,8 +597,6 @@ export const password = (options: PasswordOptions = {}) => {
   }).join('')
 }
 
-password({ numbers: 4, symbols: 2 })
-
 export default {
   setDefaultLocale,
   addLocale,
@@ -637,6 +641,8 @@ export default {
   direction,
   state,
   country,
+  county,
+  province,
   price,
   creditCardNumber,
   creditCardCVV,

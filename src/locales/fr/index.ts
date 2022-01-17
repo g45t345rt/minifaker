@@ -4,7 +4,7 @@ import firstNames from './name/firstNames'
 import maleFirstNames from './name/maleFirstNames'
 import femaleFirstNames from './name/femaleFirstNames'
 import phoneFormats from './phone/formats'
-import county from './address/county'
+import provinces from './address/provinces'
 import cityNames from './address/cityNames'
 import lastNames from './name/lastNames'
 import titles from './name/titles'
@@ -14,7 +14,6 @@ import postCodeFormats from './address/postCodeFormats'
 import streetPrefixes from './address/streetPrefixes'
 import streetSuffixes from './address/streetSuffixes'
 import directions from './address/directions'
-import states from './address/states'
 import countries from './address/countries'
 import months from './date/months'
 import weekdays from './date/weekdays'
@@ -23,14 +22,14 @@ import timeZones from '../en/address/timeZones' // TODO it's in english for now
 
 const defaultCurrency = 'EUR'
 const defaultCountry = 'France'
-const title = 'French'
+const title = 'French (France)'
 
 const locale = {
   maleFirstNames,
   femaleFirstNames,
   firstNames,
   phoneFormats,
-  county,
+  provinces,
   cityNames,
   lastNames,
   ...titles,
@@ -40,7 +39,6 @@ const locale = {
   streetPrefixes,
   streetSuffixes,
   directions,
-  states,
   countries,
   defaultCurrency,
   months,

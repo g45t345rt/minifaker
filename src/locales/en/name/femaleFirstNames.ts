@@ -501,4 +501,4 @@ export default [
   "Jaime",
   "Winifred",
   "Kristie"
-];
+]

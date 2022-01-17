@@ -17,25 +17,6 @@ test('Test locales all', () => {
     expect(minifaker.firstName({ gender: 'male' }))
     expect(minifaker.firstName({ gender: 'female' }))
     expect(minifaker.cityName())
-
-    if (locale === 'en') {
-      expect(minifaker.cityPrefix())
-      expect(minifaker.citySuffix())
-      expect(minifaker.word())
-      expect(minifaker.word({ filter: (word) => word.length > 5 }))
-      expect(minifaker.word({ type: 'noun' }))
-      expect(minifaker.state({ useAbbr: true }))
-      expect(minifaker.county())
-      expect(minifaker.country({ useCode: 'alpha2' }))
-      expect(minifaker.country({ useCode: 'alpha3' }))
-      expect(minifaker.fileName())
-      expect(minifaker.filePath())
-    }
-
-    if (locale === 'fr' || locale === 'es') {
-      expect(minifaker.streetPrefix())
-    }
-
     expect(minifaker.lastName())
     expect(minifaker.name())
     expect(minifaker.jobTitle())
@@ -62,7 +43,6 @@ test('Test locales all', () => {
     expect(minifaker.direction({ useAbbr: true }))
     expect(minifaker.direction({ type: 'ordinal' }))
     expect(minifaker.direction({ type: 'cardinal' }))
-    expect(minifaker.state())
     expect(minifaker.country())
     expect(minifaker.price())
     expect(minifaker.price({ min: 500, max: 50000 }))
@@ -70,5 +50,36 @@ test('Test locales all', () => {
     expect(minifaker.weekday())
     expect(minifaker.month({ useAbbr: true }))
     expect(minifaker.weekday({ useAbbr: true }))
+
+    if (locale === 'en') {
+      expect(minifaker.state())
+      expect(minifaker.cityPrefix())
+      expect(minifaker.citySuffix())
+      expect(minifaker.word())
+      expect(minifaker.word({ filter: (word) => word.length > 5 }))
+      expect(minifaker.word({ type: 'noun' }))
+      expect(minifaker.state({ useAbbr: true }))
+      expect(minifaker.county())
+      expect(minifaker.country({ useCode: 'alpha2' }))
+      expect(minifaker.country({ useCode: 'alpha3' }))
+      expect(minifaker.fileName())
+      expect(minifaker.filePath())
+    }
+
+    if (locale === 'fr') {
+      expect(minifaker.streetPrefix())
+      expect(minifaker.province())
+    }
+
+    if (locale === 'es') {
+      expect(minifaker.streetPrefix())
+      expect(minifaker.province())
+      expect(minifaker.state())
+      expect(minifaker.state({ useAbbr: true }))
+    }
+
+    if (locale === 'fr-CA') {
+      expect(minifaker.province())
+    }
   })
 })
