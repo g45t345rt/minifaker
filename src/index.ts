@@ -31,10 +31,6 @@ const throwNoLocaleData = (locale: Locale, key: string) => {
   throw new Error(`The locale [${locale}] data of [${key}] doest not exists. Mostly not implemented yet!.`)
 }
 
-const setSeed = (seed: string) => {
-  random = _seedrandom(seed)
-}
-
 const getLocaleData = <T>({ locale: _locale, key }: { locale?: Locale, key: string }): T => {
   if (!defaultLocale) throwNoDefaultLocale()
 
@@ -49,6 +45,10 @@ const getLocaleData = <T>({ locale: _locale, key }: { locale?: Locale, key: stri
 export const nanoId = _nanoid
 export const nonsecure = _nanoid_nonsecure
 export const uuid = _uuid
+
+export const setSeed = (seed: string) => {
+  random = _seedrandom(seed)
+}
 
 export const addLocale = (name: string, localeData) => {
   const noLocales = Object.keys(locales).length === 0
