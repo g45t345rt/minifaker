@@ -1,6 +1,6 @@
 # minifaker
 
-Generate fake data.  
+Generate fake data.
 An alternative to faker.js with both esm and cjs syntax
 <https://github.com/Marak/faker.js>
 
@@ -29,7 +29,7 @@ I also want to use Typescript and introduce new functions.
 
 ### Duplicates
 
-I've notice that faker locales have duplicate words :S.  
+I've notice that faker locales have duplicate words :S.
 I'll try fix the duplicates when importing locale files to reduce size as much as possible.
 
 ### Replacing old functions with new powerful packages instead
@@ -41,7 +41,7 @@ I'll try fix the duplicates when importing locale files to reduce size as much a
 ### Using functions
 
 ```ts
-// You can either import minifaker completely 
+// You can either import minifaker completely
 // or import the functions you need
 import minifaker, { arrayElement } from 'minifaker'
 // const minifaker = require('minifaker')
@@ -106,7 +106,7 @@ random.boolean|n/a|boolean
 random.uuid|n/a|uuid -> `uuid` funcs
 n/a|n/a|nanoid -> `nanoId` funcs
 name.firstName|en,fr|firstName
-phone.phoneNumber|en,fr,fr-CA|phoneNumber
+phone.phoneNumber|en,fr,fr-CA,en-US|phoneNumber
 address.cityName|en,fr|cityName
 address.cityPrefix|en|cityPrefix
 address.citySuffix|en|citySufix

@@ -13,7 +13,7 @@ import commonMimeTypes from './data/commonMimeTypes'
 import chars from './data/chars'
 
 // https://stackoverflow.com/questions/61047551/typescript-union-of-string-and-string-literals
-type Locale = (string & {}) | 'en' | 'fr' | 'fr-CA' | 'es' // we need intellisense for locales but also want any type of string for custom locale
+type Locale = (string & {}) | 'en' | 'fr' | 'fr-CA' | 'es' | 'en-US' // we need intellisense for locales but also want any type of string for custom locale
 
 const locales = {}
 let defaultLocale = null

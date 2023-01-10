@@ -3,8 +3,9 @@ import '../src/locales/en'
 import '../src/locales/fr'
 import '../src/locales/fr-CA'
 import '../src/locales/es'
+import '../src/locales/en-US'
 
-const locales = ['en', 'fr', 'fr-CA', 'es']
+const locales = ['en', 'fr', 'fr-CA', 'es', 'en-US']
 
 test('Test locales all', () => {
   expect(() => minifaker.cityPrefix({ locale: 'fr' })).toThrow() // fr does not have city prefix - test throwNoLocaleData()
@@ -80,6 +81,10 @@ test('Test locales all', () => {
 
     if (locale === 'fr-CA') {
       expect(minifaker.province())
+    }
+
+    if (locale === 'en-US') {
+      expect(minifaker.phoneNumber()).toMatch(/^\([2-9][0-9][0-9]\) [0-9]{3}-[0-9]{4}$/)
     }
   })
 })
