@@ -10,7 +10,7 @@ An alternative to faker.js with both esm and cjs syntax
 
 ## Supported locales
 
-`en` | `fr`, `fr-CA` | `es`
+`en`, `en-US` | `fr`, `fr-CA` | `es`
 
 ## Why
 
