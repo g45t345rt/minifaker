@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "ts-node bundle.ts && tsc ./src/index.ts --declaration --emitDeclarationOnly --downlevelIteration --esModuleInterop --outdir ./dist/types",
+    "build": "ts-node bundle.ts && tsc --project ./tsconfig.esmtypes.json && tsc --project ./tsconfig.cjstypes.json && tsc --project ./tsconfig.types.json",
     "prepublishOnly": "npm run build"
   },
   "repository": {
